@@ -1,0 +1,174 @@
+<div class=" container" style="margin-top: 30px;">
+    <div class="row text-center loginheads">
+        <h2 class="banner" style="font-size: 32px">Welcome To Anvayaa ICICI BANK Portal</h2>
+
+        <p style="font-size: 16px;">One stop parent care solution, for your peace of mind.</p>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="form-signin col-sm-8 col-md-8">
+            <h3 class="form-signin-heading">Register</h3>
+            <form [formGroup]="RegisterForm" class="" role="form">
+                <div class="row">
+                    <div class="row">
+                        <div class="form-group col-sm-12 search" (keyup)="nameValidation()">
+                            <label for="Name" class="nameclass">Your Name</label>
+                            <span class="faicon  faiconname"> <i class=" fa fa-user"></i></span>
+                            <input type="text" class="firstName" formControlName="Name" class="form-control " id="Name"
+                                placeholder="Your Name" name="Name" required>
+                            <span for="" class="validationInputBox"
+                                *ngIf='this.RegisterForm.controls["Name"].status=="INVALID" && this.Register==true'>*Name
+                                Mandatory</span>
+                            <span for="" class="validationInputBox"
+                                *ngIf='!nameValidationpatt &&this.RegisterForm.value.Name!=""'>*Only
+                                Alphabets</span>
+                        </div>
+                    </div>
+
+                    <!-- <div class="form-group col-md-6 search">
+                        <label for="Mobile">Mobile Number</label>
+                        <br>
+
+                        <ngx-intl-tel-input [enableAutoCountrySelect]="false" [enablePlaceholder]="true"
+                            [searchCountryFlag]="true" [searchCountryField]="[SearchCountryField.Iso2,SearchCountryField.Name]" 
+                            (countryChange)="onCountryChange($event)" [selectedCountryISO]="CountryISO.India"
+                            formControlName="CountryCode" [selectFirstCountry]="false" [maxLength]="15"
+                            [phoneValidation]="false" [separateDialCode]="separateDialCode"
+                            [numberFormat]="PhoneNumberFormat.National" name="phone">
+                        </ngx-intl-tel-input>
+                        <div class="row">
+                            <span for="" class="validationInputBox"
+                                *ngIf=' this.Register==true && this.RegisterForm.value.CountryCode==null'>*Number
+                                Mandatory</span>
+                            <span *ngIf="contryName" style=" color: #CE0909;">Please share active whatsapp number if
+                                available</span>
+
+                        </div>
+                    </div> -->
+                    <div class="row">
+                        <div class="form-group col-md-6 mobileNumber">
+                            <label for="State">Mobile Number</label>
+                            <div class="customerSelect  ng-autocomplete">
+                                <ngx-intl-tel-input [enableAutoCountrySelect]="false" [enablePlaceholder]="true"
+                                    [searchCountryFlag]="true"
+                                    [searchCountryField]="[SearchCountryField.Iso2,SearchCountryField.Name]"
+                                    (countryChange)="onCountryChange($event)" [selectedCountryISO]="CountryISO.India"
+                                    formControlName="CountryCode" [selectFirstCountry]="false" [maxLength]="15"
+                                    [phoneValidation]="false" [separateDialCode]="separateDialCode"
+                                    [numberFormat]="PhoneNumberFormat.National" name="phone" required>
+                                </ngx-intl-tel-input>
+                            </div>
+                            <span class="validationInputBox"
+                                *ngIf='Register==true && (RegisterForm.value.CountryCode==null && RegisterForm.value.CountryCode?.number==undefined)'>*Please
+                                Enter the MobileNumber</span>
+                        </div>
+                        <div class="form-group col-sm-6 search">
+                            <label for="emailid">Email ID</label>
+                            <span class="faicon "> <i class="fa fa-envelope" aria-hidden="true"></i></span>
+                            <input type="email" formControlName="EmailID" class="form-control" id="EmailID"
+                                (keyup)="email($event)" placeholder="Email ID" name="email" required>
+
+                            <span for="" class="validationInputBox"
+                                *ngIf='this.RegisterForm.controls["EmailID"].status=="INVALID" && this.Register==true'>*EmailID
+                                Mandatory</span>
+                            <span for="" class="validationInputBox"
+                                *ngIf='!emailValidation &&this.RegisterForm.value.EmailID!=""'>*Enter Correct
+                                Pattern</span>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6 search">
+                            <label for="Password">Password</label>
+                            <span class="faicon "> <i class=" fa fa-unlock-alt">
+                                </i></span>
+                            <input type="password" formControlName="Password" class="form-control" id="password"
+                                placeholder="Password" name="Password" required ng-minlength="6" ng-maxlength="20">
+                            <span for="" class="validationInputBox"
+                                *ngIf='this.RegisterForm.controls["Password"].status=="INVALID" && this.Register==true'>*Password
+                                Mandatory</span>
+                        </div>
+                        <div class="form-group col-sm-6 search">
+                            <label for="Password">Re-type Password</label>
+                            <span class="faicon "> <i class=" fa fa-unlock-alt">
+                                </i></span>
+                            <input type="password" class="form-control" id="password" placeholder="Re-type Password"
+                                (keyup)="passwod($event)" formControlName="ReTypePassword" name="RetypePassword"
+                                required>
+                                <label for="" class="validationInputBox" *ngIf="!passwordValidation">Password Not match</label>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <span>Select Your Service Location</span>
+                    </div>
+                    <div class="row">
+                        <!-- State Selection Start -->
+                        <div class="form-group col-md-6 Statesearch">
+                            <div>
+                                <label for="State">State</label>
+                            <!-- <div class="customerSelect  ng-autocomplete"> -->
+                                <ng-autocomplete [data]="States" searchKeyword="Name" style="height: 14px;"
+                                    placeholder="Please enter the State" (selected)='onStateSelect($event)'
+                                    (inputCleared)="onStateChange()" [itemTemplate]="itemTemplate">
+                                </ng-autocomplete>
+                                <ng-template #itemTemplate let-item>
+                                    <a [innerHTML]="item.Name"></a>
+                                </ng-template>
+                                <ng-template #notFoundTemplate let-notFound>
+                                    <div [innerHTML]="html" style="color: #CE0909;"></div>
+                                </ng-template>
+                            <!-- </div> -->
+                            </div>
+                            <!-- <div> -->
+                                <span class="validationInputBox" *ngIf='Register==true && State==""'>*Please select the
+                                    State</span>
+                            <!-- </div> -->
+                            
+                        </div>
+                       
+                        <!-- State Selection End -->
+                        <!-- City Selection Start -->
+                        <div class="form-group col-md-6 Statesearch">
+                                <label for="City">City</label>
+                                <!-- <div class="customerSelect  ng-autocomplete"> -->
+                                    <ng-autocomplete [data]="selectedStateCities" searchKeyword="Name"
+                                        style="height: 14px;" placeholder="Please enter the City"
+                                        [itemTemplate]="itemTemplate" (selected)="onCitySelection($event)" #CityValue>
+                                    </ng-autocomplete>
+                                    <ng-template #itemTemplate let-item>
+                                        <a [innerHTML]="item.Name"></a>
+                                    </ng-template>
+                                    <ng-template #notFoundTemplate let-notFound>
+                                        <div [innerHTML]="html" style="color: #CE0909;"></div>
+                                    </ng-template>
+                                <!-- </div> -->
+                                <span class="validationInputBox" *ngIf='Register==true && CityName==""'>*Please select the
+                                    City</span>
+                        </div>
+                        
+                        <!-- City Selection End -->
+
+                    </div>
+
+
+                </div>
+                <div class="form-group">
+                    <button class="pull-right" type="submit" style="float: right;"
+                        (click)="RegisterCustomer()">Register</button>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="registernow">Already user? <a ui-sref="Signin" style="cursor: pointer;"
+                        (click)="LoginPage()">Login</a></div>
+            </form>
+        </div>
+        <div class="col-sm-2"></div>
+
+    </div>
+
+</div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#914573" type = "ball-spin-clockwise" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>

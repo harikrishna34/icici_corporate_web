@@ -1,0 +1,105 @@
+<div class="bodycontentNew">
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-6 col-sm-12 col-md-4 col-lg-4" >
+            <a  style="text-decoration: none;">
+                <div type="button"  data-bs-toggle="modal" data-bs-target="#CustomerEmergencyAlert"  class="emergency" ><img src="../../assets/images/emergency-lg.png" width="45" height="40"
+                        alt="" /> Emergency</div>
+            </a>
+        </div>
+        <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4" style="margin-bottom:10px">
+            <div class="appointments-alert-card">
+                <span class="num" *ngIf="requestDetails&&requestDetails.currentrequests">{{requestDetails.currentrequests}}</span>
+                <h3>Current Requests</h3>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-12 col-md-4 col-lg-4" style="margin-bottom:10px">
+            <div class="appointments-alert-card">
+                <span class="num" *ngIf="requestDetails">{{requestDetails.completedrequests}}</span>
+                <h3>Completed Requests</h3>
+            </div>
+        </div>
+    </div>
+   
+    <div class="row topmargin20">
+        <div class="col-sm-12">
+            <hr class="headerline">
+            <span class="rowheader"> Services </span>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-2" title="{{categorie.AliasName}}"
+            *ngFor="let categorie of categories| orderBy: 'AliasName': 'asc'">
+            <a >
+                <div class="service-card">
+                    <img src="{{categorie.OtherIconFiles.iosandweb}}" height="100" width="100"
+                        alt="{{categorie.AliasName}}" />
+                </div>
+                <h4 class="name">{{categorie.AliasName|replaceUnderscore |titlecase}}</h4>
+            </a>
+        </div>
+    </div>
+    <div class="row topmargin20" *ngFor="let categorie of categories" id="{{categorie.CategoryID}}">
+        <div class="col-sm-12">
+            <hr class="headerline">
+            <span class="rowheader">{{categorie.AliasName |replaceUnderscore |titlecase}}</span>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" *ngFor="let Service of Services | orderBy: 'AliasName':'asc'  "
+            title="{{Service.AliasName}}" [hidden]="Service.CategoryTypeID != categorie.CategoryID ">
+            <div class="service-card">
+                <img src="{{Service.OtherIconFiles.iosandweb}}" height="100" width="100" alt="{{Service.AliasName}}" />
+            </div>
+            <h4 class="name">{{(Service.AliasName).replace('_',' ')}}</h4>
+            <p style="text-align:center;">
+                <button (click)="bookPage(Service)" class="BookNowBtn" style="border-radius: 50px;height:35px;margin-top:10px;"
+                    >
+                    <span 
+                    *ngIf="Service.SubCategoryName !='ELECTRONIC_MEDICAL_RECORDS_AND_COMPREHENSIVE_ANNUAL_MEDICAL_CHECKUP'" >
+                        Book
+                        Now</span>
+                    <span
+                        *ngIf="Service.SubCategoryName =='ELECTRONIC_MEDICAL_RECORDS_AND_COMPREHENSIVE_ANNUAL_MEDICAL_CHECKUP'">Add
+                        Records</span></button>
+    
+            </p>
+        </div>
+    </div>
+   
+</div>
+
+  <div class="modal fade" id="CustomerEmergencyAlert" role="dialog" aria-hidden="true" data-backdrop="static"
+    data-keyboard="false">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header model">
+                <!-- <button type="button" class="close">&times;</button> -->
+                <h4 class="m">Emergency Alert</h4>
+            </div>
+            <form  [formGroup]="EmergencyRequest">
+                <div class="modal-body appointment-modal">
+                    <div class="row">
+                        <div class="col-sm-12 details-row text-center">
+                            <h2 style="font-weight: 300">Select Emergency For.</h2>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="email" class="health-label">Select Beneficiary</label>
+                            <select class="form-select  " formControlName="CustomerName"
+                                 required>
+                                <option selected="" value="" disabled="">Select Beneficiary</option>
+                                <option *ngFor=" let user of users" value="{{user.CustID}}">{{user.Name}}</option>
+                            </select>
+                            <span for="Requested" class="error ng-hide"
+                                *ngIf="this.EmergencyRequest.controls['CustomerName'].status=='INVALID' &&createRequestBtn"> Please Select
+                                Beneficiary</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" #closebutton>Close</button>
+                    <button type="button" class="BookNowBtnSubmit pull-right"
+                        (click)="EmergencyRequestCreate()">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "white" type = "ball-scale-multiple" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p></ngx-spinner>

@@ -1,0 +1,105 @@
+<div class="bodycontentAllRequest" style="background-color:#f4f4f4 ;">
+    <div class="row">
+        <div class="col-sm-12">
+            <hr class="headerline">
+            <span class="rowheader">Requests</span>
+        </div>
+       
+        <div class="col-sm-12 topmargin20" >
+            <div class="row">
+                <!-- ngIf: users.length > 1 -->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="email">Select Category </label>
+                        <select class="form-control " name="Parent" required>
+                            <!-- <option value="{{Categories}}" *ngFor="let Categories of Categories">{{Categories}}</option> -->
+                            <option selected value="">All Categories</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="email">Select Status </label>
+                        <select class="form-control " name="Parent" required >
+                            <!-- <option value="{{Status}}" ng-repeat="Status in Status">{{Status | fixEnumCase}}</option> -->
+                            <option selected value="">All Status</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" >
+                <div id="upcoming" class="">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Request Id</th>
+                                    <th>Date</th>
+                                    <th>Service </th>
+                                    <th>Status</th>
+                                    <th>View</th>
+                                    <th>Reschedule</th>
+                                    <th>Cancel</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <tr *ngFor="let request of orders;let i=index">
+                                    <td class="tableNew">{{request.RequestID}}</td> 
+                                    <td class="tableNew">{{request.CreatedDate *1000 | date:'dd MMM yy hh:mm a'}}</td>
+                                    <td class="tableNew"> {{request.AliasName }}</td>
+                                    <!-- <td class="tableNew">{{request.SubCategoryName }}</td> -->
+                                    <td class="tableNew"><span class="txt-red txt500" style="color: #d71e38;">{{request.Status}}</span>
+                                    </td> 
+                                    <td >
+                                        <button type="button" class="viewBtn" (click)="ViewOrder(request.RequestID)">View</button>
+                                    </td>
+                                    <td >
+                                        <button class="viewBtn" type="button"  data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="RequestData(request)">Reschedule</button>
+                                    </td>
+                                    <td >
+                                        <button [ngClass]="{'btnColor' : request.Status=='Canceled'}" type="button" class="viewBtn"   [disabled]="request.Status=='Canceled'" (click)="CancelRequest(request)">Cancel</button>
+                                    </td>
+                             
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Launch static backdrop modal
+  </button> -->
+  
+  <!-- Modal -->
+  <form [formGroup]="Reschedule">
+  <div class="modal fade"  id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+            <div>
+                select Date:
+            </div>
+         <input type="datetime-local" formControlName="RequestedDate" value="">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" #closebutton>Close</button>
+          <button type="button" class="btn btn-primary" (click)="RescheduleRequest()" >Reschedule</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "white" type = "ball-scale-multiple" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p></ngx-spinner>

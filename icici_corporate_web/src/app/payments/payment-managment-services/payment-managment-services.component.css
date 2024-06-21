@@ -1,0 +1,57 @@
+.body{
+    margin-top: 180px;
+}
+
+.balanceTextContent{
+    font-weight: 400;
+    color: purple;
+    margin-left: 15px;
+    font-size: x-large;
+}
+
+.fontweight4{
+    font-weight: 400;
+    margin-left: 15px;
+}
+
+.row{
+        margin-right: calc(0 * var(--bs-gutter-x)) !important;
+          margin-left: calc(0 * var(--bs-gutter-x)) !important;
+}
+
+.noteText{
+    font-weight: 500;
+    
+   padding: 30px;
+
+}
+
+.errorColor{
+    font-size: small;
+    color: red;
+}
+.options:hover{
+ 
+    box-shadow: 0 0 30px rgba(33,33,33,.3); 
+}
+
+
+.terms-and-condition-title{
+
+     color: purple;
+     font-weight: 400;
+}
+
+.terms-list{
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.terms-details{
+    font-weight: 700;
+    font-size: 14px;
+    padding: 16px 8px 16px 16px;
+    font-style: initial;
+}
+
+

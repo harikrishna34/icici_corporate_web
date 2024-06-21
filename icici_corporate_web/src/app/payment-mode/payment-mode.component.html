@@ -1,0 +1,286 @@
+<div class="bodycontent">
+    <div class="row">
+        <div class="card">
+            <div class="card-header">
+                <h5 id="planName">{{packageDetails.AliasName}} Details</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 ">
+                        <div class="card priceDetailsCard">
+                            <div class="card-body">
+                                <ul class="list-group ">
+                                    <li class="list-group-item" class="planPriceDetails">
+                                        <span id="planPricetag">Plan Price Details</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between ">
+                                        <span> Plan Price</span> <span><i class="bi bi-currency-dollar"
+                                                *ngIf="packageDetails.CurrencyType != 'INR'"></i><i
+                                                class="bi bi-currency-rupee"
+                                                *ngIf="packageDetails.CurrencyType == 'INR'"></i>{{packageDetails.Price}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between "
+                                        *ngIf="packageDetails.Tax">
+                                        <span> GST {{packageDetails.Tax}} %</span> <span>
+                                            <i
+                                                class="bi bi-currency-dollar"
+                                                *ngIf="packageDetails.CurrencyType != 'INR'"></i><i
+                                                class="bi bi-currency-rupee"
+                                                *ngIf="packageDetails.CurrencyType == 'INR'"></i>{{packageDetails.TaxPrice}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between " id="totalPrice">
+                                        <span> Total Price</span> <span><i class="bi bi-currency-dollar"
+                                                *ngIf="packageDetails.CurrencyType != 'INR'"></i><i
+                                                class="bi bi-currency-rupee"
+                                                *ngIf="packageDetails.CurrencyType == 'INR'"></i>{{packageDetails.TotalPrice}}</span>
+                                    </li>
+                                    <li>
+                                        <div class="row gridView">
+                                            <div class="col-md-6 " *ngIf="packageDetails.CurrencyType != 'INR'">
+                                                <div class="priceFigureUSD">
+                                                    <p><i
+                                                            class="bi bi-currency-dollar"></i>{{packageDetails.TotalPrice}}
+                                                        / year</p>
+                                                    <!-- <div><span id="currenyType">USD</span></div>
+                                                        <div><span id="price">{{packageDetails.TotalPrice}}</span></div>
+                                                        <span class="duration">Per Year</span> -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="priceFigureINR">
+                                                    <p><i
+                                                            class="bi bi-currency-rupee"></i>{{packageDetails.TotalPriceEqualentINR}}
+                                                        / year</p>
+
+                                                    <!-- <div><span id="currenyType">INR</span></div>
+                                                        <div><span id="price">{{packageDetails.TotalPriceEqualentINR}}</span></div>
+                                                        <div><span class="duration">Per Year</span></div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row"><b>The above Price is inclusive of All Taxes.</b></div>
+                                <div class="row"><b>Note:While using international credit/debit cards your issuing bank
+                                        maycharge
+                                        you conversion fee additionally.</b></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="paymentType">
+                            <span id="paymentTypeTag">Choose Payment Type</span>
+                            <div class="paymentOption">
+                                <!-- <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="paymentType" value="Offline"
+                                        (click)="onOfflinePaymet()">
+                                    <label class="form-check-label">Offine Payment</label>
+                                </div> -->
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="paymentType" value="Online"
+                                        (click)="onOnlinePaymet()">
+                                    <label class="form-check-label"> Online Payment</label>
+                                </div>
+
+                            </div>
+                            <div clas="offlinePayment card-body" *ngIf="paymentType=='Offline'">
+                                <div class="row">
+                                    <ul class="list-group offlinePaymentSelection">
+                                        <!-- <li class="list-group-item" id="cash">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="offlinePaymentMode"
+                                                    value="Cash" (change)="onOfflinePaymentMode($event)">
+                                                <label class="form-check-label"> Cash</label>
+                                            </div>
+                                        </li> -->
+                                        <li class="list-group-item" id="cheque">
+                                            <div class="form-check">
+                                                <input class="form-check-input" #PaymentMode type="radio"
+                                                    name="offlinePaymentMode" value="Cheque"
+                                                    (change)="onOfflinePaymentMode($event)">
+                                                <label class="form-check-label"> Cheque</label>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item" id="Wiretransfer">
+                                            <div class="form-check">
+                                                <input class="form-check-input" #PaymentMode type="radio"
+                                                    name="offlinePaymentMode" value="Wiretransfer"
+                                                    (change)="onOfflinePaymentMode($event)">
+                                                <label class="form-check-label"> Wire Transfer</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="row">
+                                    <span id="tcDeclaration">
+                                        <input id="checkbox" type="checkbox" (click)="onDeclaration($event)"> I DECLARE
+                                        that
+                                        I
+                                        have understood the terms and
+                                        conditions on <a href="https://www.anvayaa.com/">www.anvayaa.com</a>
+                                    </span>
+                                </div>
+                                <div class="row" style="margin-top: 10px;">
+                                    <div class="col-md-4" style="margin-top: 10px;"><input type="text"
+                                            class="form-control" #binNumber placeholder="Enter First 6 Digits of Card">
+                                    </div>
+                                    <div class="col-md-5" style="margin-top: 10px;"><button class="anvayaa-btn-lg"
+                                            type="button" (click)="onBinVerify(binNumber.value)">Verify</button></div>
+                                </div>
+                                <!-- <div class="row">
+                                    <button class="btn" id="paymentBtn" [disabled]="!binNumberValidation"
+                                        value="MakeOfflinePaymet" (click)="onOfflinePaymentSubmit()">Make Offline
+                                        Paymet</button>
+                                </div> -->
+                            </div>
+                            <div class="online row" *ngIf="paymentType=='Online'">
+                                <div class="card-header"><span>Select Payment Method To Continue</span></div>
+                                <div class="card-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item"><input class="form-check-input" type="radio"
+                                                name="onlinePaymentMode" value="ICICI_CCAvenue"
+                                                (click)="onPaymentModeClick($event)">&nbsp;&nbsp;<span>Credit/Debit/NetBanking</span>
+                                        </li>
+                                        <!-- <li class="list-group-item"><input class="form-check-input" type="radio"
+                                                name="onlinePaymentMode" value="PAYTM"
+                                                (click)="onPaymentModeClick($event)">&nbsp;&nbsp;<span>Paytm</span></li> -->
+                                    </ul>
+                                </div>
+                                <div class="cardfooter" *ngIf="paymentMode">
+                                    <div>
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex justify-content-between"><span>Plan fee
+                                                </span><span>Rs. {{transactionCharges.planFeeINR}}</span></li>
+                                            <!-- <li class="list-group-item d-flex justify-content-between"><span>TXN Charges
+                                                </span><span>Rs. {{transactionCharges.transactionChargesINR}}</span>
+                                            </li> -->
+                                            <li class="list-group-item d-flex justify-content-between"><span>Total in
+                                                </span><span>Rs. {{transactionCharges.totalINR}}</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="row">
+                                        <span id="tcDeclaration">
+                                            <input id="checkbox" type="checkbox" (click)="onDeclaration($event)"> I
+                                            DECLARE
+                                            that I
+                                            have understood the terms and
+                                            conditions on <a href="https://www.anvayaa.com/">www.anvayaa.com</a>
+                                        </span>
+                                    </div>
+                                    <div class="row" style="margin-top: 10px;" *ngIf="declaration">
+                                        <div class="col-md-4" style="margin-top: 10px;"><input type="text"
+                                                class="form-control" #binNumber
+                                                placeholder="Enter First 6 Digits of Card"></div>
+                                        <div class="col-md-5" style="margin-top: 10px;"><button class="anvayaa-btn-lg"
+                                                type="button" (click)="onBinVerify(binNumber.value)">Verify</button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <!-- paytm Payment Gateway start -->
+                                        <html>
+
+                                        <head></head>
+
+                                        <body>
+                                            <form #paytmForm
+                                                action='https://secure.paytm.in/oltp-web/processTransaction'
+                                                method='post'>
+                                                <input type="hidden" name="Name" value="{{planPaymentResponse.Name}}" />
+                                                <input type="hidden" name="MID" value="{{planPaymentResponse.MID}}" />
+                                                <input type="hidden" name="CHANNEL_ID"
+                                                    value="{{planPaymentResponse.CHANNEL_ID}}" />
+                                                <input type="hidden" name="CHECKSUMHASH"
+                                                    value="{{planPaymentResponse.CHECKSUMHASH}}" />
+                                                <input type="hidden" name="CUST_ID"
+                                                    value="{{planPaymentResponse.CUST_ID}}" />
+                                                <input type="hidden" name="EMAIL"
+                                                    value="{{planPaymentResponse.EMAIL}}" />
+                                                <input type="hidden" name="INDUSTRY_TYPE_ID"
+                                                    value="{{planPaymentResponse.INDUSTRY_TYPE_ID}}" />
+                                                <input type="hidden" name="CALLBACK_URL"
+                                                    value="{{planPaymentResponse.CALLBACK_URL}}" />
+                                                <input type="hidden" name="MID" value="{{planPaymentResponse.MID}}" />
+                                                <input type="hidden" name="MOBILE_NO"
+                                                    value="{{planPaymentResponse.MOBILE_NO}}" />
+                                                <input type="hidden" name="ORDER_DETAILS"
+                                                    value="{{planPaymentResponse.ORDER_DETAILS}}" />
+                                                <input type="hidden" name="ORDER_ID"
+                                                    value="{{planPaymentResponse.ORDER_ID}}" />
+                                                <input type="hidden" name="REQUEST_TYPE"
+                                                    value="{{planPaymentResponse.REQUEST_TYPE}}" />
+                                                <input type="hidden" name="TXN_AMOUNT"
+                                                    value="{{planPaymentResponse.TXN_AMOUNT}}" />
+                                                <input type="hidden" name="WEBSITE"
+                                                    value="{{planPaymentResponse.WEBSITE}}" />
+                                                <input type="submit" class="gatewayPaymentBtn" value="Pay Now"
+                                                    (click)="paytmForm.submit()"
+                                                    [disabled]="!(declaration && binNumberValidation)"
+                                                    *ngIf="paymentType=='Online' && paymentMode==true && transactionCharges.PaymentMode=='Paytm'">
+                                            </form>
+                                        </body>
+
+                                        </html>
+                                        <!-- paytm Payment Gateway End -->
+
+                                        <!-- HDFC Payment Gateway start -->
+                                        <html>
+    
+                                        <body>
+                                            <form #hdfcform action='https://secure.payu.in/_payment' method='post'>
+                                                <input type="hidden" name="firstname"
+                                                    value="{{planPaymentResponse.firstname}}" />
+                                                <input type="hidden" name="surl" value="{{planPaymentResponse.surl}}" />
+                                                <input type="hidden" name="phone" value="{{planPaymentResponse.phone}}" />
+                                                <input type="hidden" name="key" value="{{planPaymentResponse.key}}" />
+                                                <input type="hidden" name="hash" value="{{planPaymentResponse.hash}}" />
+                                                <input type="hidden" name="curl" value="{{planPaymentResponse.curl}}" />
+                                                <input type="hidden" name="furl" value="{{planPaymentResponse.furl}}" />
+                                                <input type="hidden" name="txnid" value="{{planPaymentResponse.txnid}}" />
+                                                <input type="hidden" name="productinfo"
+                                                    value="{{planPaymentResponse.productinfo}}" />
+                                                <input type="hidden" name="amount" value="{{planPaymentResponse.amount}}" />
+                                                <input type="hidden" name="email" value="{{planPaymentResponse.email}}" />
+                                                <input type="submit" class="gatewayPaymentBtn " value="Pay Now" 
+                                                    (click)="hdfcform.submit()"
+                                                    *ngIf="paymentType=='Online' && paymentMode==true && transactionCharges.PaymentMode=='HDFC'"
+                                                    [disabled]="!(declaration && binNumberValidation)">
+                                            </form>
+                                        </body>
+    
+                                        </html>
+                                        <!-- HDFC Payment Gateway start -->
+
+                                        <!-- cc Avenue Gateway start -->
+                                        <form #ccAvenue form id="nonseamless" method="post" name="redirect"
+                                            action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction">
+                                            <input type="hidden" id="encRequest" name="encRequest"
+                                                value={{planPaymentResponse.encRequest}}>
+                                            <input type="hidden" name="access_code" id="access_code"
+                                                value={{planPaymentResponse.accessCode}}>
+                                            <button (click)="ccAvenue.submit()" class="anvayaa-btn-lg "
+                                                *ngIf="paymentType=='Online' && paymentMode==true && transactionCharges.PaymentMode=='ICICI_CCAvenue'"
+                                                [disabled]="!(declaration && binNumberValidation)">Pay 
+                                                Now</button>
+
+                                        </form>
+                                        <!-- cc avenue Gateway End -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="white" type="ball-scale-multiple" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>

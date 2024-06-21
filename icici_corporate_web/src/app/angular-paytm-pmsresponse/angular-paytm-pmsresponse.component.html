@@ -1,0 +1,88 @@
+<!-- <div class="card">
+    <div class="row">
+        <div class="col-sm-10 details-row">
+            <div class="">
+                <label class="heading ng-binding">Payment Management Details</label>
+            
+            </div>
+        </div>
+    </div>
+    <div class="row  ng-scope">
+        <div class="col-sm-12 details-row ng-binding">
+          Anvayaa Payment ID:    <span class="qnt pull-right txt-purple ng-binding">AKCPD0000392972 </span>
+        </div>
+    </div>
+    <div class="row  ng-scope">
+        <div class="col-sm-12 details-row ng-binding">
+         Transaction Id<span class="qnt pull-right txt-purple ng-binding">20221215010420000810103121169788928 </span>
+        </div>
+    </div>
+    <div class="row  ng-scope">
+        <div class="col-sm-12 details-row ng-binding">
+        Payment INFO <span class="qnt pull-right txt-purple ng-binding">PaymentManagementService </span>
+        </div>
+         <div class="col-sm-12 details-row ng-binding">
+        Amount <span class="qnt pull-right txt-purple ng-binding">Rs 5000</span>
+        </div>
+         <div class="col-sm-12 details-row ng-binding">
+        Transaction Time <span class="qnt pull-right txt-purple ng-binding"> </span>
+        </div>
+    
+    </div>
+</div> -->
+
+
+
+<!-- <div>
+    <div class="card" style="width: 48rem;">
+        <h3>Payment Failed</h3>
+        <table>
+            <tr> <td>Anvayaa Payment ID</td><td>:</td><td>{{paytmPaymentResponse.AnvayaaPaymentID}}</td></tr>
+            <tr> <td>Transaction Id</td><td>:</td><td>{{paytmPaymentResponse.GatewayTransactionID}}</td></tr>
+            <tr> <td>Payment INFO</td><td>:</td><td>{{paytmPaymentResponse.PaymentFor}}</td></tr>
+            <tr> <td>Amount</td><td>:</td><td>{{paytmPaymentResponse.Amount}}</td></tr>
+            <tr> <td>Transaction Time</td><td>:</td><td></td></tr>
+        </table>
+      </div>
+</div> -->
+
+
+<div class="bodycontent">
+
+
+    <!-- <div *ngIf="paytmPaymentResponse.PaymentStatus==undefined">
+        <p id="notFound">Payment Details Not Found</p>
+    </div> -->
+    <div *ngIf="paytmPaymentResponse.PaymentStatus!=undefined">
+        <div class="row"  >
+            <h1 *ngIf="paytmPaymentResponse.AnvayaaPaymentStatus=='success'"><span style="color: #4BB543">Payment Success</span></h1>
+            <h1 *ngIf="paytmPaymentResponse.AnvayaaPaymentStatus!='success'"><span style="color:#d71e38;">Payment Failed</span></h1>
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item " id="packageName"><span>Payment Details</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Payment
+                            ID<span>{{paytmPaymentResponse.AnvayaaPaymentID?paytmPaymentResponse.AnvayaaPaymentID:'-'}}</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Transaction Id
+                            <span>{{paytmPaymentResponse.GatewayTransactionID?paytmPaymentResponse.GatewayTransactionID:'-'}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">Price
+                            <span>{{paytmPaymentResponse.Price?paytmPaymentResponse.Price:'-'}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">Transaction Time
+                            <span>{{paytmPaymentResponse.TransactionTime?paytmPaymentResponse.TransactionTime:'-'}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">Bank ReferenceNumber
+                            <span *ngIf="paytmPaymentResponse.AnvayaaPaymentStatus!='success'">{{paytmPaymentResponse.bank_ref_num?paytmPaymentResponse.bank_ref_num:'-'}}</span>
+                            <span *ngIf="paytmPaymentResponse.AnvayaaPaymentStatus=='success'">{{paytmPaymentResponse.BankTransactionID}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+</div>

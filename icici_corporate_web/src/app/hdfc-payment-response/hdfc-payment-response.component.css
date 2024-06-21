@@ -1,0 +1,12 @@
+#packageName{
+    font-size: xx-large;
+    text-align: center;
+    list-style-type: none;
+    color: #914573;;
+
+}
+#notFound{
+    text-align: center;
+    padding:120px;
+    font-size: xxx-large;
+}

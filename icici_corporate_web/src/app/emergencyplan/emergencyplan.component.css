@@ -1,0 +1,12 @@
+
+.a:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 50px rgba(33,33,33,.3);
+}
+
+.view {
+  -webkit-transform: all 0.0s ease;
+  -moz-transform: all 0.0s ease;
+  transform: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(9, 199, 24, 0.6);
+}

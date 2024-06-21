@@ -1,0 +1,39 @@
+
+
+
+    <div class="login-wrapper container" >
+        <div class="row text-center loginheads">
+            <h2 class="banner" style="font-size: 32px">WELCOME TO ICICI BANK PORTAL</h2>
+            <p style="font-size: 16px;">One stop parent care solution, for your peace of mind.</p>
+        </div>
+        <div class="row"  >
+            <div class="col-sm-4"></div>
+            <form class="form-signin col-sm-4"  name="verifyAccount" [formGroup]="otpVarification">
+                <div class="form-signin-inside">
+                    <h3 class="form-signin-heading" style="text-align: center">Please Check Your email for Verification Code </h3>
+                    <label for="otp" style="color:red"></label>
+                    <label for="" class="validationInputBox">{{responseMessage}}</label>
+                    <div class="form-group topmargin20 search">
+                      
+                        <label for="mobile">Verification Code</label>
+                        <span class="icon"> <i class="icon" class="fa fa-unlock-alt" aria-hidden="true"></i></span>
+                        <input style="padding-left: 40px;" type="text" formControlName="OTPCode"  class="form-control" id="otp" placeholder="Verification Code" required>
+                        <!-- <span for="otp" class="error"  >Otp is Required </span> -->
+                    </div>
+                    <span for="" class="validationInputBox"
+                    *ngIf='this.otpVarification.controls["OTPCode"].status=="INVALID" && this.VarifyOTP==true'>*OTP
+                    Mandatory</span>
+                    <div class="form-group">
+                        <button class="anvayaa-btn-lg  pull-right" type="submit" (click)="otpVarify()">Submit</button>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </form>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>
+    
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "white" type = "ball-scale-multiple" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p></ngx-spinner>
+    
+

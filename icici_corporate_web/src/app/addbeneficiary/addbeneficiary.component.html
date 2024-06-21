@@ -1,0 +1,465 @@
+
+
+
+<div class="bodycontentNew">
+
+
+    <div class="modal fade" id="profileupdatereq" role="dialog" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header model">
+                    <button type="button" class="close" ng-click="close()">&times;</button>
+                    <h4 class="modal-title header">Alert !!!</h4>
+                </div>
+                <div class="modal-body appointment-modal">
+                    <div class="row">
+                        <div class="col-sm-12 details-row text-center">
+                            <h2 style="font-weight: 300">Enter your parent’s date of birth, and we can help you surprise
+                                them on their Birthdays and Anniversaries.</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="anvayaa-btn-lg pull-right" click="close()">ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12" *ngIf="Beneficiaries.length>0">
+        <hr class="headerline">
+        <span class="rowheader">Profile Update</span>
+    </div>
+    <div class="row" *ngIf="Beneficiaries.length>0">
+        <div class="col-sm-1 "></div>
+        <div class="login-wrapper container">
+            <div class="row">
+                <div class="modal fade" id="profileupdate" role="dialog" aria-hidden="true" data-backdrop="static"
+                    data-keyboard="false">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header model">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title header">Profile Update</h4>
+                            </div>
+                            <div class="modal-body appointment-modal">
+                                <div class="row">
+                                    <div class="col-sm-12 details-row text-center">
+                                        <img src="../../assets/images/confirmation_512.png" height="150">
+                                    </div>
+                                    <div class="col-sm-12 details-row text-center">
+                                        <h2 style="font-weight: 300">Your Profile Is updated</h2>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="anvayaa-btn-lg pull-right">ok</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+        
+              
+           <div class="col-md-8" style="width: 100%;">              
+ <form class="form-signin col-sm-8" *ngIf="Beneficiaries.length>0" name="ProfileUpdateForm" role="form"
+    [formGroup]="Addbeneficiaryform">
+    <div class="form-signin-inside">
+        <span class="rowheader topmargin20">Profile Details</span>
+        <div class="row topmargin20">
+
+      
+            
+            <div class="col-sm-12">
+                <div class="row ">
+                    <div class=" col-sm-4 ">
+
+                        <div class="group-gap ">
+
+                            <!-- Upload image -->
+                            <div class="avatar-upload">
+                                <div class="avatar-edit">
+                                    <input formControlName="img" type='file' id="imageUpload" accept=".png, .jpg, .jpeg"
+                                        #fileInput (change)="uploadFile($event)" />
+                                </div>
+                              <!-- <div>
+                                <img src="{{Beneficiaries[0].BeneficiaryProfileImageURL}}" alt="imd">
+                              </div> -->
+                            
+                                <div class="avatar-preview">
+                                    <div id="imagePreview"
+                                        [style.backgroundImage]="'url('+ imageUrl +')'">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div >
+
+                    
+                        <button type="submit" class="btn btn-danger btn-lg btn-block"
+                            (click)="fileInput.click()"    [hidden]="imageUrl"
+                            >Upload Image</button>
+                            <button type="submit" class="btn btn-danger btn-lg btn-block"
+                            (click)="fileInput.click()"   [hidden]="!imageUrl" >Change Image</button>
+                        </div>
+                        <div class="edit"></div>
+
+                        <br>
+
+
+                        <br>
+                        <br>
+                        <div class="form-group col-sm-12">
+                            <select class=" form-select" name="Parent" required
+                                (change)="CustID($event)" formControlName="CustID">
+                                <option value="" selected="selected" disabled="disabled">please select
+                                </option>
+                                <option value="{{userDetails.CustID}}"
+                                    *ngFor="let userDetails of Beneficiaries">
+                                    {{userDetails.Name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="row" >
+                            <div class="col-sm-6 form-group  search">
+                                <label for="Name"> Name </label>
+                                <span class="faloicon1 "> <i class="fa fa-male"
+                                        aria-hidden="true"></i></span>
+                                <input type="text" formControlName="Name" class="form-control"
+                                    placeholder=" Name" required>
+                                <span for="Name" class="error"
+                                    *ngIf="this.Addbeneficiaryform.controls['Name'].status=='INVALID' &&updateBeneficiaryBtn==true">*Name
+                                    number required
+                                </span>
+                            </div>
+
+                            <div class="col-sm-6 form-group  search" (keyup)="checkValidation($event)">
+                                <label for="Age">Age</label>
+                                <span class="faloicon1 "> <i class="fa fa-mobile"
+                                        aria-hidden="true"></i></span>
+                                <input type="text" class="form-control"
+                                    id="password" placeholder="Age" name="fAge" formControlName="Age" required>
+                                <span for="Name" class="error"
+                                    *ngIf="this.Addbeneficiaryform.controls['Age'].status=='INVALID' &&updateBeneficiaryBtn==true">*age
+                                     required
+                                </span>
+
+                                <span *ngIf="agebtn &&this.Addbeneficiaryform.value.Age!=''" >Age msut be number</span>
+                            </div>
+                            <div class="col-sm-6 form-group  search">
+                                <label for="MobileNumber">Parent Mobile Number</label>
+                                <span class="faloicon1 "> <i class="fa fa-mobile"
+                                        aria-hidden="true"></i></span>
+                                <input type="text" formControlName="MobileNumber" class="form-control"
+                                    id="password" placeholder="Parent Mobile Number"
+                                    name="ParentMobileNumber" [maxlength]="10" required >
+
+                                <span for="Name" class="error"
+                                    *ngIf="this.Addbeneficiaryform.controls['MobileNumber'].status=='INVALID' &&updateBeneficiaryBtn==true">*Mobilee
+                                    number required 
+                                </span>
+                            </div>
+                            <div class="col-sm-9 form-group ">
+                                <label for="Address">Address</label>
+                                <textarea style="resize: none; height: 80px" class="form-control "
+                                    name="Address" required placeholder="Address"
+                                    formControlName="Address" cols="5" rows="3" required=""></textarea>
+                                <span for="Name" class="error"
+                                    *ngIf="this.Addbeneficiaryform.controls['Address'].status=='INVALID' &&updateBeneficiaryBtn==true">address Required
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group">
+            <button type="submit" (click)="updateBeneficiaryDetails()"
+                class="anvayaa-btn-lg pull-right">Save</button>
+        </div>
+        <br>
+        <br>
+    </div>
+</form>
+        </div>
+              
+              <div class="col-md-4">
+          
+              </div>
+               
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-1"></div>
+    <div class="login-wrapper " [hidden]="Beneficiaries.length>0">
+        <div class="row">
+            <form class="form-signin col-sm-8" [formGroup]="beneficiaryform" *ngIf="page==1" name="AddfatherdetailsForm"
+                role="form">
+                <div class="form-signin-inside">
+                    <span class="rowheader topmargin20">Beneficiary 1 Details</span>
+                    <div class="row topmargin20">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <div class="avatar-upload">
+                                        <div class="avatar-edit">
+                                            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"
+                                                #fileInput (change)="uploadFile($event)" />
+                                        </div>
+                                 
+                                    
+                                        <div class="avatar-preview">
+                                            <div id="imagePreview"
+                                                [style.backgroundImage]="'url('+ imageUrl +')'">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-danger btn-lg btn-block"
+                                    (click)="fileInput.click()">Upload Image</button>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="row">
+                                        <div class="col-sm-6 form-group  search">
+                                            <label for="Name"> Name </label>
+                                            <span class="faloicon1 "> <i class="fa fa-male"
+                                                    aria-hidden="true"></i></span>
+                                            <input type="text" formControlName="Name" class="form-control"
+                                                placeholder=" Name" required>
+                                            <span for="Parent" class="error" style="color: red;"
+                                                *ngIf="this.beneficiaryform.controls['Name'].status=='INVALID' && addBeneficiaryBtn==true">
+                                                First Name is Required </span>
+                                        </div>
+                                        <div class="col-sm-6 form-group  search">
+                                            <label for="MobileNumber"> Mobile Number</label>
+                                            <span class="faloicon1 "> <i class="fa fa-mobile"
+                                                    aria-hidden="true"></i></span>
+                                            <input type="text" formControlName="Mobilenumber" class="form-control"
+                                                placeholder="Mobile Number" required ng-pattern="/^[6-9][0-9]{9}$/">
+                                            <span for="Parent" class="error"
+                                                *ngIf="this.beneficiaryform.controls['Mobilenumber'].status=='INVALID' && addBeneficiaryBtn==true">
+                                                Mobile Number is Required</span>
+                                            <!-- <span class="error" *ngIf="this.beneficiaryform.controls['Mobilenumber'].status=='INVALID' && addBeneficiaryBtn==true">
+                                          And Enter Valid Number  </span> -->
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="Gender"> Gender </label>
+                                            <select class="form-select form-control" name="PrimaryBeneficiaryGender"
+                                                required formControlName="Gender">
+                                                <option value="" selected="selected" disabled="disabled">please select
+                                                </option>
+                                                <option value="Male"
+                                                    ng-if="motherobj.SecondaryBeneficiaryGender !='Male'">
+                                                    Male</option>
+                                                <option value="Female"
+                                                    ng-if="motherobj.SecondaryBeneficiaryGender !='Female'">Female
+                                                </option>
+                                            </select>
+                                            <span for="Parent" class="error"
+                                                *ngIf="this.beneficiaryform.controls['Gender'].status=='INVALID' && addBeneficiaryBtn==true">
+                                                Select Gender </span>
+                                        </div>
+                                        <div class="col-sm-6 form-group  search">
+                                            <label for="Age">Age</label>
+                                            <span class="faloicon1 "> <i class="fa fa-mobile"
+                                                    aria-hidden="true"></i></span>
+                                            <input type="text" formControlName="Age" class="form-control" id="password"
+                                                placeholder="Age" name="fAge" required data-ng-pattern="/^[0-9]+$/">
+                                            <span for="Name" class="error"
+                                                *ngIf="this.beneficiaryform.controls['Age'].status=='INVALID' && addBeneficiaryBtn==true">Age
+                                                is Required </span>
+                                            <!-- <span for="Name" class="error"
+                                            ng-if="AddfatherdetailsForm.fAge.$invalid && showErrors">Age must be
+                                            Number</span> -->
+                                        </div>
+                                        <div class="col-sm-9 form-group ">
+                                            <label for="Address">Address</label>
+                                            <textarea style="resize: none; height: 80px" class="form-control " required
+                                                placeholder="Address" formControlName="Address" cols="5"
+                                                rows="3"></textarea>
+                                            <span for="Name" class="error"
+                                                *ngIf="this.beneficiaryform.controls['Address'].status=='INVALID' && addBeneficiaryBtn==true">Address
+                                                is
+                                                Required </span>
+                                        </div>
+                                        <!-- <div class="col-sm-6 form-group  search" ng-if="false">
+                                        <label for="EmailID">Email</label>
+                                       <span class="faloicon1"> <i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                        <input type="email" formControlName="Email" class="form-control"
+                                            id="password" placeholder="Email" >
+                                        <span for="Name" class="error"
+                                        *ngIf="this.beneficiaryform.controls['Gender'].status=='INVALID' && addBeneficiaryBtn==true">Required </span>
+
+                                    </div> -->
+                                        <!-- <div class="col-sm-6 form-group  search" ng-if="false">
+                                        <label for="password">Other Contact Number</label>
+                                        <span class="faloicon1 "> <i class="fa fa-mobile" aria-hidden="true"></i></span>
+                                        <input type="text" formControlName="Mobilenumber"
+                                            class="form-control" name="FatherSecondaryContactNumber"
+                                            placeholder=" Secondary Contact Number" ng-minlength="10" ng-maxlength="13">
+                                        <span for="Password" class="error"
+                                        *ngIf="this.beneficiaryform.controls['Gender'].status=='INVALID' && addBeneficiaryBtn==true">Number
+                                            should Be Atlest 10 digits</span>
+                                        <span for="Password" class="error"
+                                        *ngIf="this.beneficiaryform.controls['Gender'].status=='INVALID' && addBeneficiaryBtn==true">Number
+                                            Cannot Be More than 13 digits</span>
+                                    </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group pull-right">
+                        <!--   <button type="submit" ng-click="skipfather()" class="btn btn-danger">Skip And Continue</button>&nbsp; -->
+                        <button type="submit" (click)="Beneficiary2()" class="btn btn-success ">Save And
+                            Continue</button>
+                    </div>
+                    <br>
+                    <br>
+                </div>
+            </form>
+            <form class="form-signin col-sm-8" *ngIf="page==2" name="AddmotherdetailsForm" role="form"
+                [formGroup]="beneficiaryform2">
+                <div class="form-signin-inside">
+                    <span class="rowheader topmargin20">Beneficiary 2 Details</span>
+                    <div class="row topmargin20">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <div class="avatar-upload">
+                                        <div class="avatar-edit">
+                                            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"
+                                                #fileInput (change)="uploadFile($event)" />
+                                        </div>
+                                 
+                                    
+                                        <div class="avatar-preview">
+                                            <div id="imagePreview"
+                                                [style.backgroundImage]="'url('+ imageUrl +')'">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-danger btn-lg btn-block"
+                                    (click)="fileInput.click()">Upload Image</button>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="row">
+                                        <div class="col-sm-6 form-group  search">
+                                            <label for="Name"> Name </label>
+                                            <span class="faloicon1 "> <i class="fa fa-male"
+                                                    aria-hidden="true"></i></span>
+                                            <input type="text" formControlName="Name" class="form-control"
+                                                placeholder=" Name" required>
+                                            <span for="Parent" class="error" style="color: red;"
+                                                *ngIf="this.beneficiaryform.controls['Name'].status=='INVALID' && addBeneficiaryBtn==true">
+                                                First Name is Required </span>
+                                        </div>
+                                        <div class="col-sm-6 form-group  search">
+                                            <label for="MobileNumber"> Mobile Number</label>
+                                            <span class="faloicon1 "> <i class="fa fa-mobile"
+                                                    aria-hidden="true"></i></span>
+                                            <input type="text" formControlName="Mobilenumber" class="form-control"
+                                                placeholder="Mobile Number" required>
+                                            <span for="Parent" class="error"
+                                                *ngIf="this.beneficiaryform.controls['Mobilenumber'].status=='INVALID' && addBeneficiaryBtn==true">
+                                                Mobile Number is Required</span>
+                                            <!-- <span class="error" *ngIf="this.beneficiaryform.controls['Mobilenumber'].status=='INVALID' && addBeneficiaryBtn==true">
+                                        And Enter Valid Number  </span> -->
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="Gender"> Gender </label>
+                                            <select class="form-select form-control" name="PrimaryBeneficiaryGender"
+                                                formControlName="Gender" required>
+                                                <option value="" selected="selected" disabled="disabled">please select
+                                                </option>
+                                                <option value="Male">
+                                                    Male</option>
+                                                <option value="Female"
+                                                    ng-if="motherobj.SecondaryBeneficiaryGender !='Female'">Female
+                                                </option>
+                                            </select>
+                                            <span for="Parent" class="error"
+                                                *ngIf="this.beneficiaryform.controls['Gender'].status=='INVALID' && addBeneficiaryBtn==true">
+                                                Select Gender </span>
+                                        </div>
+                                        <div class="col-sm-6 form-group  search">
+                                            <label for="Age">Age</label>
+                                            <span class="faloicon1 "> <i class="fa fa-mobile"
+                                                    aria-hidden="true"></i></span>
+                                            <input type="text" formControlName="Age" class="form-control" id="password"
+                                                placeholder="Age" name="fAge" required>
+                                            <span for="Name" class="error"
+                                                *ngIf="this.beneficiaryform.controls['Age'].status=='INVALID' && addBeneficiaryBtn==true">Age
+                                                is Required </span>
+                                            <!-- <span for="Name" class="error"
+                                          ng-if="AddfatherdetailsForm.fAge.$invalid && showErrors">Age must be
+                                          Number</span> -->
+                                        </div>
+                                        <div class="col-sm-9 form-group ">
+                                            <label for="Address">Address</label>
+                                            <textarea style="resize: none; height: 80px" class="form-control " required
+                                                placeholder="Address" formControlName="Address" cols="5" rows="3"
+                                                required></textarea>
+                                            <span for="Name" class="error"
+                                                *ngIf="this.beneficiaryform.controls['Address'].status=='INVALID' && addBeneficiaryBtn==true">Address
+                                                is
+                                                Required </span>
+                                        </div>
+                                        <!-- <div class="col-sm-6 form-group  search" ng-if="false">
+                                      <label for="EmailID">Email</label>
+                                     <span class="faloicon1"> <i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                      <input type="email" formControlName="Email" class="form-control"
+                                          id="password" placeholder="Email" >
+                                      <span for="Name" class="error"
+                                      *ngIf="this.beneficiaryform.controls['Gender'].status=='INVALID' && addBeneficiaryBtn==true">Required </span>
+
+                                  </div> -->
+                                        <!-- <div class="col-sm-6 form-group  search" ng-if="false">
+                                      <label for="password">Other Contact Number</label>
+                                      <span class="faloicon1 "> <i class="fa fa-mobile" aria-hidden="true"></i></span>
+                                      <input type="text" formControlName="Mobilenumber"
+                                          class="form-control" name="FatherSecondaryContactNumber"
+                                          placeholder=" Secondary Contact Number" ng-minlength="10" ng-maxlength="13">
+                                      <span for="Password" class="error"
+                                      *ngIf="this.beneficiaryform.controls['Gender'].status=='INVALID' && addBeneficiaryBtn==true">Number
+                                          should Be Atlest 10 digits</span>
+                                      <span for="Password" class="error"
+                                      *ngIf="this.beneficiaryform.controls['Gender'].status=='INVALID' && addBeneficiaryBtn==true">Number
+                                          Cannot Be More than 13 digits</span>
+                                  </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group pull-right">
+                    <button type="submit" click="back()" class="btn btn-primary " (click)="back()">Back</button>
+                    <button type="submit" (click)="createBeneficiariesData()" class="btn btn-success"
+                        ng-if="skip == 'skip'">Skip &
+                        Save</button>
+                    <!-- <button type="submit" click="Addbeneficiary()" class="btn btn-info "
+                    ng-if="skip == 'Notskip'">Save</button> -->
+
+                </div>
+                <br>
+                <br>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="white" type="ball-scale-multiple" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>

@@ -1,0 +1,53 @@
+<!-- <div class="bodycontent"> -->
+    <div class="login-wrapper container">
+        <div class="row text-center loginheads">
+            <h2 class="banner" style="font-size: 32px">WELCOME TO Anvayaa ICICI BANK PORTAL</h2>
+
+            <p style="font-size: 16px;">One stop parent care solution, for your peace of mind.</p>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="form-signin col-sm-4 col-md-4">
+                <div class="form-signin-inside">
+                    <h3 class="form-signin-heading" >Login</h3>
+                </div>
+                <form class="" role="form" [formGroup]="LoginForm" >
+                    <h3 class="form-signin-heading" style="color:red"></h3>
+                    <div class="row">
+                        <div class="form-group col-sm-12 search">
+                            <label for="Name">Email Id or Beneficiary Mobile Number</label>
+                            <span class="faicon "> <i class=" fa fa-user">
+                                </i></span>
+                            <input type="text" class="form-control " id="UserID"
+                              style="padding-left:40px;"  placeholder="Registered User Email Or Beneficary Mobile" formControlName="UserID"
+                                name="UserID" 
+                                (keyup)="check($event)" required>
+                        </div>
+                        <div class="form-group col-sm-12 search" *ngIf="LoginType =='Email' ">
+                            <label for="Name">Password</label>
+                            <span class="faicon "> <i class=" fa fa-unlock-alt">
+                                </i></span>
+                            <input type="password" class="form-control " id="Password"
+                                placeholder="Password" formControlName="Password"
+                                name="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-link" style="color:black;" (click)="ForgotPassword()">Forgot password? </button>
+                        <button class="Login-btn-lg  pull-right" type="submit" style="float: right;"  (click)="Login()" *ngIf="LoginType =='Email'">Login</button>
+                        <button class="Login-btn-lg  pull-right" type="submit" style="float: right;" (click)="Login()" *ngIf="LoginType =='Phone' ">Send OTP</button>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="registernow"> <button type="button" class="btn btn-link" style="color:white;" >New user?
+                        <span (click)="RegisterPage()">Register</span>     </button></div>
+                </form>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+
+    </div>
+<!-- </div> -->
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "white" type = "ball-scale-multiple" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p></ngx-spinner>

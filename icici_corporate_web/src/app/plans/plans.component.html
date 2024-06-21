@@ -1,0 +1,112 @@
+<div class="bodycontent" style="padding-top: 2%;">
+  <div *ngIf="userDetails!=null">
+    <div class="row StatusHead">
+      <h1>Status: {{userDetails.Status}}</h1>
+    </div>
+    <div class="row" style="max-width: 90%;">
+
+      <div class="col-md-5 card-body paymentDetailsCard">
+        <ul class="list-group">
+          <li class="list-group-item " id="packageNameCard">
+            <span>{{userDetails.AliasName}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">Created Date
+            <span>{{userDetails.PackageCreatedDate*1000 | date:'dd-MMM-yyyy HH:mm:SS'}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">Expiry Date
+            <span>{{userDetails.PackageExpiryDate*1000 | date:'dd-MMM-yyyy HH:mm:SS' }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">Payment Status
+            <span>{{userDetails.PaymentStatus}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">Package Price
+            <span><i class="bi bi-currency-rupee" *ngIf="userDetails.CurrencyType=='INR'"></i><i class="bi bi-currency-dollar" *ngIf="userDetails.CurrencyType=='USD'"></i> {{userDetails.Price}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">Tax Price
+            <span><i class="bi bi-currency-rupee" *ngIf="userDetails.CurrencyType=='INR'"></i><i class="bi bi-currency-dollar" *ngIf="userDetails.CurrencyType=='USD'"></i> {{userDetails.TaxPrice}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">Total Price
+            <span><i class="bi bi-currency-rupee" *ngIf="userDetails.CurrencyType=='INR'"></i><i class="bi bi-currency-dollar" *ngIf="userDetails.CurrencyType=='USD'"></i> {{userDetails.TotalPrice}}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-7"></div>
+    </div>
+  </div>
+
+ 
+
+  <div *ngIf="userDetails==null">
+    <div class="row"> 
+      <div class="col-md-8" *ngIf="!CityFound">
+        <div class="alert alert-warning" role="alert">
+
+          Thank you for choosing Anvayaa to serve your elderly in India. Our services are currently unavailable in the city your elderly are residing.
+Please do not worry, our care agent will reach out to you and ensure to find a solution to take care of your elderly in the best possible manner.
+        
+        </div>
+
+      </div>
+      <div class="col-md-8" *ngIf="CityFound">
+        <div class="alert alert-warning" role="alert">
+
+          Thank you for choosing Anvayaa to serve your elderly in India. Our services are available in the city your elderly are residing. Please continue to sign up for the plan by completing the payment or Alternatively you can call  to speak to our care agent.
+        
+        </div>
+
+      </div>
+
+    </div>
+    <div class="row">
+      <p>Please select your parent’s location:</p>
+      <div class="col-md-3">
+      <select class="form-select location" placeholder="Select your Parents Location" (change)="onCitySelect($event)">
+        <option selected value="" disabled>Select your parent’s location:</option>
+        <option *ngFor="let serviceAreas of allServiceAreas" [value]="serviceAreas.CityID">{{serviceAreas.CityName}}
+        </option>
+      </select>
+      </div>
+    </div>
+    <div style="padding-top: 60px;">
+      <div class="row">
+        <div class="col-md-3 PriceDetailsCard" *ngFor="let packages of packageDetails">
+          <div class="card">
+            <div class="card-header">
+              <h5 id="packageName">{{packages.AliasName}}</h5>
+            </div>
+            
+              <div class="packageInfo">
+                <div class="circle">
+                  <li class="list-group-item" *ngIf="packages.CurrencyType != 'INR'"> <i
+                      class="bi bi-currency-dollar"></i>{{packages.YearlyPrice}}</li>
+                  <li class="list-group-item"><i class="bi bi-currency-rupee"></i>{{packages.YearlyPriceEqualentINR  }}
+                  </li>
+                  <li class="list-group-item"> PerYear</li>
+                </div>
+              </div>
+              <!-- <div class="arrow">
+              </div> -->
+              <div class="card-body">
+              <div>
+                <ul class="list-group list-group-flush " >
+                  <li class="list-group-item bulletPoints" *ngFor="let bulletPoints of packages.BulletPoints">{{bulletPoints}}</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="packagebutton">
+                <button id="choosePackage" (click)="onPackageSelection(packages)">Choose My Care Plan</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="white" type="ball-scale-multiple" [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>

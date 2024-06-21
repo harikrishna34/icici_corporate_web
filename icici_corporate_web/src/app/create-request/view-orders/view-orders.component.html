@@ -1,0 +1,254 @@
+
+
+<div class="bodycontent">
+
+
+<div class="row" ng-cloak>
+
+  <div class="col-sm-9">
+    <h2 class="txt-red">Service Name: {{appointment.AliasName }}</h2>
+  </div>
+  <div class="col-sm-12 col-lg-6">
+    <div class="details-card">
+      <div class="row">
+        <div class="col-sm-12 details-row">
+          <div class="icon-calendar">
+            <h5>{{appointment.RequestedDate * 1000 | date:'dd MMM yyyy hh:mm a'}}</h5>
+          </div>
+        </div>
+      </div>
+      <div class="row " ng-if="!appointment.CareManagerDetails">
+          <div class="col-sm-12 details-row">
+            <div class="icon-fieldemployee">
+              <h5>Care Manager: Not Assigned</h5></div>
+          </div>
+        </div>
+        <div class="row " ng-if="appointment.CareManagerDetails">
+          <div class="col-sm-12 details-row">
+            <div class="col-sm-12 ">
+              <span class="pull-left left-icon"><img  src="../../../assets/images/fieldemp-light.png" alt=""   />
+                            </span>
+              <div class="rightcol">
+                <h5 *ngIf="appointment&&appointment.CareManagerDetails">Care Manager: {{appointment.CareManagerDetails.FirstName}} {{appointment.CareManagerDetails.LastName}}
+                   <!-- <span class="pull-right  radius">
+                                    <img src="images/track_2x.png" alt="" />
+                        <a ng-click="trackEmployee()" >Track</a></span> -->
+                      </h5> 
+              </div>
+            </div>
+          </div>
+        </div>
+    <!--   <div class="row">
+        <div class="col-sm-12 details-row" ng-show="appointment.PaymentStatus !='Approved' && appointment.SubCategoryData.Name != 'EMERGENCY' && appointment.Status != 'Canceled' ">
+          To make Online Payment click Here
+          <button type="button" class="anvayaa-btn-lg " ng-click="OnlinePayment(appointment)">Online Payment</button>
+        </div>
+      </div> -->
+      <div class="row" ng-show="false">
+        <div class="col-sm-12 details-row">
+          <!-- <button type="button" class="anvayaa-btn-lg " ng-click="PaypalPayment()">Paypal Payment</button> -->
+        </div>
+      </div>
+      <div class="row" ng-show="false">
+      </div>
+      <html>
+
+      <head>
+      </head>
+
+      <body>
+        <form action='https://secure.payu.in/_payment' method='post'>
+          <!-- <input type="hidden" name="firstname" value="{{paymentconfig.firstname}}" />
+          <input type="hidden" name="surl" value="{{paymentconfig.surl}}" />
+          <input type="hidden" name="phone" value="{{paymentconfig.phone}}" />
+          <input type="hidden" name="key" value="{{paymentconfig.key}}" />
+          <input type="hidden" name="hash" value="{{paymentconfig.hash}}" />
+          <input type="hidden" name="curl" value="{{paymentconfig.curl}}" />
+          <input type="hidden" name="furl" value="{{paymentconfig.furl}}" />
+          <input type="hidden" name="txnid" value="{{paymentconfig.txnid}}" />
+          <input type="hidden" name="productinfo" value="{{paymentconfig.productinfo}}" />
+          <input type="hidden" name="amount" value="{{paymentconfig.amount}}" />
+          <input type="hidden" name="email" value="{{paymentconfig.email}}" />
+          <input type="submit" class="anvayaa-btn-lg " value="Continue Payment" style="border-radius: 50px;margin-top: 10px;padding-left: 15px;padding-right: 20px;" ng-if="paymentconfig"> -->
+        </form>
+      </body>
+
+      </html>
+      <!-- <div class="row ">
+        <div class="col-sm-12 details-row txt-sl">
+          Updates
+        </div>
+      </div>
+      <div class="row " ng-repeat="StatusTrack in  appointment.StatusTrack">
+        <div class="col-sm-12 details-row">
+          {{StatusTrack.Priority}}. {{StatusTrack.Time * 1000 | date:'dd-MMM-yyyy HH:mm:ss'}} <span class="qnt pull-right txt-purple">{{StatusTrack.Status}} <img src="images/done.png" width="27" height="27"  alt=""/></span>
+        </div>
+      </div> -->
+      <!--   <div class="row " ng-if="!appointment.FieldEmployeeData">
+                <div class="col-sm-12 details-row">
+                    <div class="icon-fieldemployee">
+                        <h5>Field employee: Santhosh</h5> Emp Id: ANY123</div>
+                </div>
+            </div> -->
+      <!-- <div class="row " ng-if="appointment.FieldEmployeeData">
+                <div class="col-sm-12 details-row">
+                    <div class="pull-left left-icon"><img src="images/fieldemp-light.png" alt="" /></div>
+                    <div class="pull-left">
+                        <h5>Field employee: {{appointment.FieldEmployeeData.FirstName}}</h5> Emp Id: {{appointment.FieldEmployeeData.EmployeeID}}</div>
+                    <div class="pull-right left-icon">
+                        <img src="images/track_2x.png" alt="" />
+                        <a class="row" href="" ng-click="trackEmployee()" ui-sref="TrackEmployee">Track</a>
+                    </div>
+                </div>
+            </div> -->
+      <!-- <div class="row " ng-if="appointment.ClinicData">
+                <div class="col-sm-12 details-row">
+                    Total <span class="price pull-right">Rs.{{appointment.ClinicData.ConsultationFee}}</span>
+                </div>
+            </div> -->
+      <!-- <div class="row ">
+                <div class="col-sm-6 details-row text-center" ng-hide=" appointment.Status == 'Completed' || appointment.Status == 'Canceled' ">
+                    <button class="anvayaa-btn-lg" ng-click="cancelReq()">Cancel Appointment </button>
+                </div>
+                <div class="col-sm-6 details-row text-left">
+                    <button class="anvayaa-btn-lg" ng-click="ReschudeleReq(appointment)">Reschedule Appointment </button>
+                </div>
+            </div> -->
+    </div>
+  </div>
+
+  <!--   <div class="modal fade" id="AppointmentReschudeleRequest" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#9acfea;">
+                    <button type="button" class="close" ng-click="close()" data-dismiss="modal">&times;</button>
+                    <h1 class="modal-title">Appointment Reschedule</h1>
+                </div>
+                <form name="rescheduleform" role="form" novalidate show-validation>
+                    <div class="modal-body appointment-modal">
+                        <div class="row">
+                            <div class="col-sm-12 ">
+                                <h3>Select Appoint Time</h3>
+                            </div>
+                            <div class="col-sm-12 ">
+                                <div class="form-group ">
+                                    <div class="input-group date" id="datetimepicker12">
+                                        <input class="form-control" ng-model="reschedule.RequestedDate" name="Requested" required id="inputdatetimepicker" ng-show="false" />
+                                    </div>
+                                </div>
+                                <span for="Requested" class="error" ng-show="rescheduleform.Requested.$invalid && showErrors">Reschedule appointment Date is  required</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="anvayaa-btn-lg " ng-click="close()" data-dismiss="modal">Close</button>
+                        <button type="button" class="anvayaa-btn-lg " ng-click="ReschudeleAppointment(rescheduleform)">Reschedule</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> -->
+  <!--   <div class="modal fade" id="AppointmentCancelRequest" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="close()" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Appointment Cancel</h4>
+                </div>
+                <div class="modal-body appointment-modal">
+                    <div class="row">
+                        <div class="col-sm-12 ">
+                            Do You Want to cancel Appointment ?
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="anvayaa-btn-lg " ng-click="close()" data-dismiss="modal">Close</button>
+                    <button type="button" class="anvayaa-btn-lg " ng-click="CancelAppointment()" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+  <!--  <div class="modal fade" id="AppointmentCancel" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="closeDialog()" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Appointment Cancel</h4>
+                </div>
+                <div class="modal-body appointment-modal">
+                    <div class="row">
+                        <div class="col-sm-12 ">
+                            {{appointment}}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="anvayaa-btn-lg pull-right" ng-click="closeDialog()" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+  <!--  <div class="modal fade" id="AppointmentRescheduleConfirm" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="Reschudeleclose()" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Appointment Reschedule</h4>
+                </div>
+                <div class="modal-body appointment-modal">
+                    <div class="row">
+                        <div class="col-sm-12 ">
+                            {{rescheduleResponse}}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="anvayaa-btn-lg pull-right" ng-click="Reschudeleclose()" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+  <div class="col-sm-12 col-lg-6">
+    <div class="details-card " style="height: 100px;">
+      <div class="row ">
+        <div class="col-sm-12 details-row txt-sl">
+          Updates
+   
+    
+      <!-- <div class="row " ng-repeat="StatusTrack in  appointment.StatusTrack">
+        <div class="col-sm-12 details-row">
+          {{StatusTrack.Priority}}. {{StatusTrack.Time * 1000 | date:'dd-MMM-yyyy HH:mm:ss'}} <span class="qnt pull-right txt-purple">{{StatusTrack.Status}} <img src="images/done.png" width="27" height="27"  alt=""/></span>
+        </div>
+      </div> -->
+    </div>
+  </div>
+   <div class=" col-sm-6 col-lg-6">
+      <div class="panel scrollbar" id="style-6">
+        <div class="panel-heading">
+          <span class="panel-title"> Status Track</span>
+        </div>
+        <div class="panel-body ptn pbn ">
+          <ol class="timeline-list">
+            <li class="timeline-item" *ngFor="let StatusTrack of appointment.StatusTrack">
+              <div class="timeline-icon ">
+                <!-- TxtColor -->
+                <img src="{{StatusTrack.img}}" width="27" height="27" alt="" >
+                <!-- <span class="fa fa-envelope" style="padding: 8px;"></span> -->
+              </div>
+              <div class="timeline-desc">
+                <b>{{StatusTrack.Status}}</b>
+                <p>{{StatusTrack.Note}}</p>
+              </div>
+              <div style="float: right;" class="timeline-date">{{StatusTrack.Time * 1000 | date:'dd MMM yyyy hh:mm a'}}</div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div></div>
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "white" type = "ball-scale-multiple" [fullScreen] = "true">
+  <p style="color: white" > Loading... </p></ngx-spinner>

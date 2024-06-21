@@ -1,0 +1,244 @@
+<div class="row ">
+
+  <div class="col-md-2"></div>
+
+  <div class="col-sm-8 body">
+    <button style="margin:10px;border-radius: 0% !important;" class="btn btn-danger" (click)="transactions()">View all
+      Transactions</button>
+    <div *ngIf="fundAddingpage">
+      <form class="card " [formGroup]="FundsForm">
+
+        &nbsp;<div class="balanceTextContent"><span>Balance
+            INR</span>&nbsp;&nbsp;<span>:</span><span>&nbsp;&nbsp;{{balanceAmount}}</span></div>
+        <hr>
+        <p class="fontweight4">Define your threshold limits for Anvayaa to spend for your beneficiaries with no
+          approvals.</p>
+        <hr>
+        <div class="row">
+          <div class="col-md-7">
+            <p class="fontweight4">
+              Enter amount for Emergency assistance spends. (Min amount accepted INR 5,000)
+            </p>
+          </div>
+          <div class="col-md-5">
+            <input type="number" placeholder="5000"  formControlName="EmergencyAmount" class="form-control" min="5000" required (input)="checkemergencyamount()">
+            <span *ngIf="FundsForm.controls['EmergencyAmount'].hasError('min')" class="errorColor">
+              *Minimum Emergency Amount 5000.
+            </span>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-7">
+            <p class="fontweight4">
+              Enter amount you want to add into your account.
+            </p>
+          </div>
+          <div class="col-md-5">
+            <input type="number" formControlName="Amount" class="form-control" placeholder="Min Amount {{MinAmount}}" required min="{{MinAmount}}">
+            <div
+              *ngIf="FundsForm.controls['Amount'].invalid && (FundsForm.controls['Amount'].touched || FundsForm.controls['Amount'].dirty)||submit">
+              <span *ngIf="FundsForm.controls['Amount'].errors?.['required']" class="errorColor">
+                * amount required
+              </span>
+              <span *ngIf="FundsForm.controls['Amount'].hasError('min')" class="errorColor">
+                *minimum {{MinAmount}}.
+              </span>
+
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div style="text-align:center"> <button class="btn btn-danger" type="submit" (click)="paymentpage()"
+            [disabled]="FundsForm.invalid">Continue to Add Funds</button></div>
+        <hr>
+        <div class="noteText">
+          Note: During medical emergencies, the amount approved by you for emergency assistance spends would be utilized
+          for arranging the appropriate ambulance services, and transporting the beneficiaries to the hospital.
+
+          The amount approved by you for regular needs would be spend towards utility bills and other payments that you
+          want us to address.
+
+          For transactions those exceed the threshold limits set by you, Anvayaa would be taking an approval from you
+          and then make payments. You can view the entire transaction history on click of View All Transactions button.
+          You would also be notified via email for each transactions we perform towards your beneficiaries.
+        </div>
+      </form>
+    </div>
+    <div *ngIf="paymentOptions">
+      <div class="card  optionsMainCard">
+
+        <div class="row">
+          <div class="col-md-4 ">
+            <div class="card" style="margin:15px;" (click)="paytmpayment('Paytm')">
+              <div class="card-body options">
+                <img src="../../../assets/images/paytm_512.png" width="180px">
+              </div>
+            </div>
+            <h6 class="text-center">PayTm</h6>
+          </div>
+          <div class="col-md-4">
+            <div class="card" style="margin:15px;" (click)="paytmpayment('HDFC')">
+              <div class="card-body options">
+                <img src="../../../assets/images/credit-card.png" width="180px">
+              </div>
+            </div>
+            <h6 class="text-center">Credit/Debit</h6>
+          </div>
+          <div class="col-md-4">
+            <div class="card" style="margin:15px;">
+              <div class="card-body options">
+                <img src="../../../assets/images/Cash.png" width="180px">
+              </div>
+            </div>
+            <h6 class="text-center">Cash</h6>
+          </div>
+          <div class="col-md-4">
+            <div class="card" style="margin:15px;">
+              <div class="card-body options">
+                <img src="../../../assets/images/cheque.png" width="180px">
+              </div>
+            </div>
+            <h6 class="text-center">Cheque</h6>
+          </div>
+          <div class="col-md-4">
+            <div class="card" style="margin:15px;">
+              <div class="card-body options">
+                <img src="../../../assets/images/bank-transfer.png" width="180px">
+              </div>
+            </div>
+            <h6 class="text-center">Wire Transfer</h6>
+          </div>
+
+
+
+
+
+
+
+        </div>
+
+      </div>
+    </div>
+    <div *ngIf="paymentDetails">
+      <div class="card  mainCard">
+        <div class="details-card">
+          <div class="row">
+            <div>
+              <div class="col-sm-12  ">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="terms-details">
+                        <b>Payment GateWay:</b>
+                      </th>
+                      <th class="terms-details">{{paytmForm.value.PaymentMode}}
+                        <strong type="button" class="btn btn-link" style="padding: 0px 0px;"
+                          (click)="changepaymentMethod()">Change</strong>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th class="terms-details">
+                        <b>Amount:</b>
+                      </th>
+                      <th class="terms-details">Rs {{FundsForm.value.Amount}}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <b> Charges( {{CreditPaymentData.HDFCChargesPercentage}}
+                          {{CreditPaymentData.PaytmChargesPercentage}})%</b>
+                      </td>
+                      <th class="terms-details" [hidden]="CreditPaymentData.PaytmTransactionCharges?true:false">Rs
+                        {{CreditPaymentData.HDFCTransactionCharges}}</th>
+                      <th class="terms-details" [hidden]="CreditPaymentData.HDFCTransactionCharges?true:false">Rs
+                        {{CreditPaymentData.PaytmTransactionCharges}}</th>
+                    </tr>
+                    <tr>
+                      <td class="terms-details">
+                        <b>Total</b>
+                      </td>
+                      <th class="terms-details">Rs{{this.CreditPaymentData.TotalPrice}}</th>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="text-center">
+                  <div *ngIf="paytmres && paytmForm.value.PaymentMode == 'Paytm'">
+                    <html>
+                    <head></head>
+                    <body>
+                      <form #paytmform action='https://secure.paytm.in/oltp-web/processTransaction' method='post'>
+                        <input type="hidden" name="Name" value="{{UserData.customer.Name}}" />
+                        <input type="hidden" name="MID" value="{{paytmres.MID}}" />
+                        <input type="hidden" name="CHANNEL_ID" value="{{paytmres.CHANNEL_ID}}" />
+                        <input type="hidden" name="CHECKSUMHASH" value="{{paytmres.CHECKSUMHASH}}" />
+                        <input type="hidden" name="CUST_ID" value="{{paytmres.CUST_ID}}" />
+                        <input type="hidden" name="EMAIL" value="{{paytmres.EMAIL}}" />
+                        <input type="hidden" name="INDUSTRY_TYPE_ID" value="{{paytmres.INDUSTRY_TYPE_ID}}" />
+                        <input type="hidden" name="CALLBACK_URL" value="{{paytmres.CALLBACK_URL}}" />
+                        <input type="hidden" name="MOBILE_NO" value="{{paytmres.MOBILE_NO}}" />
+                        <input type="hidden" name="ORDER_DETAILS" value="{{paytmres.ORDER_DETAILS}}" />
+                        <input type="hidden" name="ORDER_ID" value="{{paytmres.ORDER_ID}}" />
+                        <input type="hidden" name="REQUEST_TYPE" value="{{paytmres.REQUEST_TYPE}}" />
+                        <input type="hidden" name="TXN_AMOUNT" value="{{paytmres.TXN_AMOUNT}}" />
+                        <input type="hidden" name="WEBSITE" value="{{paytmres.WEBSITE}}" />
+                        <input type="submit" class="btn btn-danger" value="Continue Paytm" (click)="paytmform.submit()">
+                      </form>
+                    </body>
+                    </html>
+                  </div>
+                  <div *ngIf="paymentconfig&&paytmForm.value.PaymentMode == 'HDFC'">
+                    <html>
+
+                    <head>
+                    </head>
+
+                    <body>
+                      <form #hdfcform action='https://secure.payu.in/_payment' method='post'>
+                        <input type="hidden" name="firstname" value="{{paymentconfig.firstname}}" />
+                        <input type="hidden" name="surl" value="{{paymentconfig.surl}}" />
+                        <input type="hidden" name="phone" value="{{paymentconfig.phone}}" />
+                        <input type="hidden" name="key" value="{{paymentconfig.key}}" />
+                        <input type="hidden" name="hash" value="{{paymentconfig.hash}}" />
+                        <input type="hidden" name="curl" value="{{paymentconfig.curl}}" />
+                        <input type="hidden" name="furl" value="{{paymentconfig.furl}}" />
+                        <input type="hidden" name="txnid" value="{{paymentconfig.txnid}}" />
+                        <input type="hidden" name="productinfo" value="{{paymentconfig.productinfo}}" />
+                        <input type="hidden" name="amount" value="{{paymentconfig.amount}}" />
+
+                        <input type="hidden" name="email" value="{{paymentconfig.email}}" />
+                        <input type="submit" class="btn btn-danger" value="Continue Payment"
+                          (click)="hdfcform.submit()">
+
+                      </form>
+                    </body>
+
+                    </html>
+                  </div>
+                </div>
+                <div>
+                  <h4 class="terms-and-condition-title">Terms & Conditions</h4>
+                  <ul class="terms-list">
+                    <li class="terms-list">
+                      2.3 % Transaction Charges.
+                    </li>
+                    <li class="terms-list">
+                      For Indain Users Only, Not Applicable for International Users
+                    </li>
+                    <li class="terms-list">
+                      Maximum transaction Limit For Non-KYC Users 20,000/- Per Month.
+                    </li>
+                    <li class="terms-list">
+                      Maximum transaction Limit For KYC Users 1,00,000/- Per Month.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,197 @@
+/* .bodycontent {
+   font-size: 14px !important;
+} */
+
+.card-header,
+.card-footer {
+    background-color: #555555;
+    align-content: center;
+}
+
+#packageName {
+    color: white;
+    margin-left: 21px;
+
+}
+
+.card {
+    margin: 10px;
+    border-radius: 15px;
+}
+
+#choosePackage {
+    background-color: white;
+    border-radius: 6px;
+}
+
+.packagebutton {
+    align-content: center;
+    margin-left: 30px;
+    border-radius: 10px;
+}
+
+.packageInfo{
+   background-color: #f2bf5e;
+   padding:20px;
+}
+
+.circle {
+    padding-top: 30px;
+    margin: auto;
+    width: 160px;
+    border-radius: 50%;
+    background-color: #d94165;
+    min-width: 150px;
+    min-height: 150px;
+    display: block;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    color:white
+}
+
+/* .arrow:after {
+    bottom: -22px;
+    left: 150px;
+    border-width: 11px;
+    border-color: #f2bf5e transparent transparent transparent;
+    border-style: solid;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+} */
+
+.arrow {
+    /* position: relative; */
+    /* bottom: -22px; */
+    /* left: 150px; */
+    border-width: 32px 146px 0;
+    border-color: #f2bf5e transparent transparent transparent ;
+    border-style:inherit;
+    content: '';
+    /* bottom: -32px; */
+    position:relative;
+}
+.PriceDetailsCard:hover {
+    transform: scale(1.04);
+  }
+/* .PriceDetailsCard:hover{
+    width:100%;
+    box-shadow: 10px #914573;
+} */
+
+#packageNameCard {
+    font-size: 14px;
+    text-align: center;
+    list-style-type: none;
+    color: #914573;
+    ;
+
+}
+
+.bulletPoints{ 
+    background: #f3f3f3; 
+    
+}
+.bulletPoints:nth-child(even) {
+     background-color: #ffff; 
+}
+
+
+.StatusHead {
+    color: #d71e38;
+
+}
+
+@media screen and (max-width: 375px) {
+    .arrow  {
+        border-width: 32px 92px 0 !important;
+  }
+}
+
+@media screen and (min-width: 375px) {
+    .arrow  {
+        border-width: 32px 100px 0 !important;
+  }
+}
+@media screen and (min-width: 400px) {
+    .arrow  {
+        border-width: 32px 115px 0 !important;
+  }
+}
+@media screen and (min-width: 450px) {
+    .arrow  {
+        border-width: 32px 150px 0 !important;
+  }
+}
+@media screen and (min-width: 500px) {
+    .arrow  {
+        border-width: 32px 165px 0 !important;
+  }
+}
+
+@media screen and (min-width: 560px) {
+    .arrow  {
+        border-width: 32px 190px 0 !important;
+  }
+}
+@media screen and (min-width: 650px) {
+    .arrow  {
+        border-width: 32px 239px 0 !important;
+  }
+}
+@media screen and (min-width: 750px) {
+    .arrow  {
+        border-width: 80px 290px 0 !important;
+  }
+}
+
+@media screen and (min-width: 768px) {
+    .arrow  {
+        border-width: 70px 80px 0 !important;
+    }
+    .circle{
+        width: 124px;
+        min-width: 110px;
+        min-height: 125px;
+        padding-top: 20px;
+    }
+}
+
+
+@media screen and (min-width: 800px) {
+    .arrow  {
+        border-width: 70px 90px 0 !important;
+    }
+    .circle{
+        width: 124px;
+        min-width: 110px;
+        min-height: 125px;
+        padding-top: 20px;
+    }
+}
+@media screen and (min-width: 900px) {
+    .arrow  {
+        border-width: 70px 105px 0 !important;
+    }
+}
+
+@media screen and (min-width: 1050px) {
+    .arrow  {
+        border-width: 80px 130px 0 !important;
+    }
+}
+@media screen and (min-width: 1100px) {
+    .arrow  {
+        border-width: 80px 150px 0 !important;
+    }
+}
+
+@media screen and (min-width: 1150px) {
+    .arrow  {
+        border-width: 80px 210px 0 !important;
+    }
+} 
+
+

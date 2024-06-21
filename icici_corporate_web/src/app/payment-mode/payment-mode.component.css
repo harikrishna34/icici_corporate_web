@@ -1,0 +1,151 @@
+ul {
+    list-style-type: none;
+}
+.anvayaa-btn-lg{
+    border-radius: 50px;
+    height:40px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.priceDetailsCard{
+    border: #914573;
+    border-style: solid;
+    border-radius: 20px;
+}
+.card-header {
+    text-align: center;
+}
+
+.card {
+    margin-top: 40px;
+    margin-right: 120px;
+
+}
+
+.card-footer {
+    text-align: center;
+}
+.gridView{
+    margin-top: 10px;
+}
+#planName {
+    padding-top: 10px;
+}
+
+.planPriceDetails {
+    height: 100px;
+    background-color: #f2bf5e;
+    color: white;
+    text-align: center;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.priceFigureUSD {
+    margin-top: 10px;
+    border: 3px solid #f2bf5e;
+    padding: 10px;
+    padding-top: 20px;
+    border-radius: 20px;
+    min-width: 90%;
+    text-align: center;
+    top:20px;
+
+}
+
+.priceFigureINR {
+    margin-top: 10px;
+    border: 3px solid #914573;
+    padding: 10px;
+    padding-top: 20px;
+    border-radius: 20px;
+    min-width: 90%;
+    text-align: center;
+    top:20px;
+}
+
+
+
+
+#duration {
+    margin-top: -40px;
+    text-align: center;
+}
+
+#planPricetag {
+
+    position: relative;
+    top: 5vh;
+}
+
+.paymentType {
+    margin-top: 40px;
+    line-height: 30px;
+}
+
+#checkbox {
+    height: 20px;
+    width: 20px
+}
+
+#paymentBtn {
+    margin-top: 25px;
+    width: 40%;
+    margin-left: 30px;
+    background-color: #914573;
+    color: white;
+    /* margin-right: 30px; */
+}
+
+.offlinePaymentSelection {
+    margin-top: 40px;
+
+}
+
+#tcDeclaration {
+    cursor: auto;
+    margin-top: 30px;
+}
+
+#onlinePaymentBtn {
+    font-size: larger;
+    color: white;
+    background-color: #914573;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.gatewayPaymentBtn {
+    font-weight: bolder;
+    width: 161px;
+    border-radius: 25px;
+    margin-top: 25px;
+}
+
+form {
+    background-color: white;
+}
+
+a {
+    color: #914573 ;
+}
+
+a:hover {
+    animation:  1s infinite blinker !important;
+}
+
+@keyframes blinker {
+    /* 0% {color: red;} */
+    40% {color: rgb(46, 223, 170);}
+    60% {color: #f2bf5e}
+    90% {color: #914573;}
+}
+
+
+/* @media only body and (max-width: 765px) {
+    .col-md-6{width:120%}
+} */
+
+
+/* @media only body and (min-width: 318px) {
+    .col-md-6{width:300%}
+  } */

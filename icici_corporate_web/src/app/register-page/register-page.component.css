@@ -1,0 +1,89 @@
+
+.customerSelect{
+    width: 155%;
+} 
+
+
+.searchArea{
+    height: 10px;
+}
+.ng-autocomplete .autocomplete-container { box-shadow: none !important;
+height: 200px;
+}
+.ng-autocomplete { 
+    
+    width: 155%;
+height: 20px;
+font-size: 20px;
+
+}
+.ng-autocomplete input { 
+    
+    font-size: 40px;
+
+
+}
+.ng-autocomplete {
+    width: 100%;
+    }
+    
+    .ng-autocomplete ::ng-deep .autocomplete-container {
+    box-shadow: none;
+    }
+    
+    .ng-autocomplete ::ng-deep .autocomplete-container ::ng-deep .input-container ::ng-deep input {
+    font-size: 0.875rem;
+    display: block;
+    height: 40px;
+    padding: 0.375rem 1rem;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.52857143;
+    color: #495057;
+    border: 1px solid #dde6e9;
+    border-radius: 0.25rem;
+    width: 100%;
+    }
+    
+    .ng-autocomplete ::ng-deep .autocomplete-container ::ng-deep .suggestions-container ::ng-deep .item ::ng-deep .row {
+    padding: 0.5rem 1rem;
+    }
+    
+    .ng-autocomplete ::ng-deep .autocomplete-container ::ng-deep .not-found {
+    border: 0;
+    }
+
+   input[type=text],
+   input[type=email],
+   input[type=password],
+   input[type=password]
+   {
+    padding-left: 40px;
+   }
+   
+  
+/*    
+   input[type=tel]{
+    width: 140%;
+    padding: 12px 40px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    height: 3.1785rem;
+} */
+
+
+.pull-right{
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+    background: #d94165;
+    height: 46px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 0;
+    -moz-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}

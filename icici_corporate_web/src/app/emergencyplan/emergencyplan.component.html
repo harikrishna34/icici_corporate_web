@@ -1,0 +1,106 @@
+<div class="container" style="padding-top: 10%;">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let Beneficiaries of users;let i=index" [ngClass]="{'view':view==i}">
+
+        <a (click)="ViewByProfile(Beneficiaries.CustID,i)"style="text-decoration: none;">
+            <img type="image" src="{{Beneficiaries.BeneficiaryProfileImageURL}}" alt="" width="60" height="60" *ngIf="Beneficiaries.BeneficiaryProfileImageURL" style=" border-radius:100%" />
+            <img src="../../assets/images/parent1_512.png" alt="" width="48" height="48" style=" border-radius:100%" *ngIf="!Beneficiaries.BeneficiaryProfileImageURL && Beneficiaries.Relation=='Father'" />
+            <img src="../../assets/images/parent2_512.png" alt="" width="48" height="48" style=" border-radius:100%" *ngIf="!Beneficiaries.BeneficiaryProfileImageURL && Beneficiaries.Relation=='Mother'" />
+            <span>{{Beneficiaries.Name}}</span>
+        </a>
+    </div>
+
+</div>
+<br>
+
+
+  <div class="row">
+  <div class="col-md-4">
+    <div class="card a" style="width: 18rem;">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{customer.Name}}</li>
+        <li class="list-group-item">Blood Group :{{customer.BloodGroup}}</li>
+        <li class="list-group-item">Age :{{customer.Age}}</li>
+        <li class="list-group-item">Gender :{{customer.Gender}}</li>
+        <li class="list-group-item">Address :{{customer.Address}}</li>
+        <li class="list-group-item">            </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="col-md-8" >
+    <div class="card a"  >
+      <div class="card-header">
+       Nearest Super Speciality Hospital
+      </div>
+      <div class="card-body" >
+        <blockquote class="blockquote mb-0" *ngFor="let nr of customer.NearestSuperSpecialityHospitals">
+          <p>{{nr.Name}}@{{nr.Address}}#{{nr.ContactNumber}}</p>
+          <!-- <footer class="blockquote-footer"><cite title="Source Title"></cite></footer> -->
+        </blockquote>
+      </div>
+    </div><br>
+
+    <div class="card a">
+      <div class="card-header">
+        Prefered Emergency Hospital
+      </div>
+
+
+      <div class="card-body"  >
+        <blockquote class="blockquote mb-0" *ngFor="let nr of customer.PreferredEmergencyHospitals">
+          <p>{{nr.Name}}@{{nr.Address}}#{{nr.ContactNumber}}</p>
+
+        </blockquote>
+
+      </div>
+
+    </div><br>
+
+    <div class="card a">
+      <div class="card-header">
+        Ambulance Services
+      </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <p></p>
+          <!-- <footer class="blockquote-footer"><cite title="Source Title"></cite></footer> -->
+        </blockquote>
+      </div>
+    </div><br>
+
+<div class="row">
+  <div class="col-md-6">
+      <div class="card a" >
+        <div class="card-header">
+          Emergency Local Contacts
+        </div>
+        <div class="card-body" >
+          <blockquote class="blockquote mb-0" *ngFor="let nr of customer.EmergencyLocalContactDetails">
+            <p>{{nr.Name}}#{{nr.ContactNumber}}</p>
+            <!-- <footer class="blockquote-footer"><cite title="Source Title"></cite></footer> -->
+          </blockquote>
+        </div>
+      </div>
+    </div><br>
+
+    <div class="col-md-6">
+      <div class="card a">
+        <div class="card-header">
+          Sponsor Contact Details
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p></p>
+            <!-- <footer class="blockquote-footer"><cite title="Source Title"></cite></footer> -->
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+</div>
+
+

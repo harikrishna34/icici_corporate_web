@@ -1,0 +1,126 @@
+<router-outlet>
+
+  <!-- <div class="row">
+<div class="col-md-2">
+   <nav class="navbar" style="z-index: 10; background-color: white;">
+    <a class="navbar-brand" >
+      <img src="../../assets/images/Anvayaa.png" width="100" alt="Anvayaa" title="Anvayaa" class="logoimg">
+    </a>
+    <div>
+      <div class="myPlans" (click)="onMyPlan()">My Plan</div>
+    </div>
+
+    <div class="" >
+      <div (click)="AllRequest()">Request History</div>
+
+    <a class="heading" >
+      <div (click)="EMR()">EMR</div>
+    </a>
+    </div>
+    <a >
+
+      <div (click)="AnvayaaServices()">Anvayaa Servicess</div>
+    </a>
+    <div>
+      <div class="PMS" (click)="onPMS()">PMS</div>
+    </div>
+    <div style="margin-right: 40px;">
+
+      <select class="form-select" (change)="Details($event)" >
+      <option selected>{{Name}}</option>
+        <option value="mod0">Benificiary Update</option>
+        <option value="mod1">Change Password</option>
+        <option value="mod2" >LogOut </option>
+      </select>
+    </div>
+
+  </nav>
+</div>
+  </div>
+  </div> -->
+
+   <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand">
+      <img src="../../assets/images/Anvayaa.png" width="100" alt="Anvayaa" title="Anvayaa" class="logoimg">
+
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation"  (click)="isCollapsed = !isCollapsed">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item   active">
+          <a class="nav-link" (click)="onMyPlan()">My Plans <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="AllRequest()">Request History</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="EMR()">EMR</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="AnvayaaServices()">Anvayaa Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="onPMS()">PMS</a>
+        </li>
+        <li class="nav-item dropdown  nameLi">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" (change)="Details($event)" >
+            {{Name}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>  -->
+
+
+  <nav class="topnav" id="myTopnav">
+    <a >
+      <img src="../../assets/images/Anvayaa.png" width="100" alt="Anvayaa" title="Anvayaa" class="logoimg">
+
+    </a>
+    <div style="text-align: right;" class="mobilenumber">
+    <span><i class="fa fa-phone" aria-hidden="true"></i></span> <span class="top-ph" style="font-size:18px;padding-right:15px;"> +91 40-4963-3996</span>
+    </div>
+    <div class="menuDiv">
+      <a class = "pointer"  style="display: none;">My Plans</a>
+      <a (click)="onMyPlan()" style="margin-top: 9%;" class = "pointer" >My Plans</a>
+      <a class="nav-link  pointer" style="margin-top: 9%;" (click)="AllRequest()">Request History</a>
+      <a class="nav-link pointer"  style="margin-top: 9%;" (click)="EMR()">EMR</a>
+      <a class="nav-link pointer"  style="margin-top: 9%;" (click)="AnvayaaServices()">Anvayaa Services</a>
+      <a class="nav-link pointer" style="margin-top: 9%;"  (click)="onPMS()">PMS</a>
+      <a class="nav-link pointer" style="margin-top: 9%;"  (click)="Emergencyplan()">Emergency Plan</a>
+      <a class="nav-link pointer" style="margin-top: 9%;"  (click)="Asers()">ASERS</a>
+      <a class="pointer" style="margin-top: 9%;">
+
+        <select   (change)="Details($event)" style="border:none;width:100px">
+        <option selected><b>{{Name}}</b></option>
+          <option value="mod0">Benificiary Update</option>
+          <option value="mod1">Change Password</option>
+          <option value="mod2" >LogOut </option>
+        </select>
+      </a>
+    </div>
+
+
+
+
+
+    <a style="font-size:15px;" class="icon" (click)="myFunction()">&#9776;</a>
+  </nav>
+
+
+
+
+
+
+
+
+
+
+</router-outlet>

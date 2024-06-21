@@ -1,0 +1,109 @@
+ <div class="row allcp-form">
+                                        <div class="col-md-2 ph10 mb5">
+                                            <h6 style="color: #9b9ead">City</h6>
+
+                                        </div>
+                                        <div class="col-md-2 ph10 mb5">
+                                            <h6 style="color: #9b9ead">Contact Name</h6>
+
+                                        </div>
+                                        <div class="col-md-2 ph10 mb5">
+                                            <h6 style="color: #9b9ead">Contact Number</h6>
+
+                                        </div>
+                                        <div class="col-md-2 ph10 mb5">
+                                            <h6 style="color: #9b9ead">Alternate Number</h6>
+
+                                        </div>
+                                        <div class="col-md-2 ph10 mb5">
+                                            <h6 style="color: #9b9ead">Address</h6>
+
+                                        </div>
+
+                                        <div class="col-md-2 ph10 mb5">
+                                            <h6 style="color: #9b9ead">Action</h6>
+                                        </div>
+                                    </div>
+                                    <div class="row allcp-form" data-ng-repeat="PointOfContact in PointOfContacts">
+                                        <div class="col-md-2 ph10 mb5">
+                                            <input class="form-control" type="text" ng-modal="PointOfContact.City"
+                                                id="City" name="City" placeholder="City">
+                                            <!-- value="{{choice.State}}" -->
+                                            <span for="City" class="error"
+                                                ng-show="AreaOprationsFrom.City.$invalid && showErrors">
+                                                City is Required
+                                            </span>
+
+                                        </div>
+                                        <div class="col-md-2 ph10 mb5">
+                                            <input class="form-control" type="text"
+                                                ng-modal="PointOfContact.ContactName" id="ContactName"
+                                                name="ContactName" placeholder="Enter Name ">
+                                            <!--   value="{{choice.ContactName}}" -->
+                                            <span for="ContactName" class="error"
+                                                ng-show="AreaOprationsFrom.ContactName.$invalid && showErrors">
+                                                Name is Required
+                                            </span>
+                                        </div>
+                                        <div class="col-md-2 ph10 mb5">
+                                            <input class="form-control" type="text" ng-modal="PointOfContact.ContactNo"
+                                                id="ContactNo" name="ContactNo" placeholder="Contact Number">
+                                            <!--  value="{{choice.ContactNo}}" -->
+                                            <span for="ContactNo" class="error"
+                                                ng-show="AreaOprationsFrom.ContactNo.$invalid && showErrors">
+                                                Contact Number is Required
+                                            </span>
+                                        </div>
+                                        <div class="col-md-2 ph10 mb5">
+                                            <input class="form-control" type="text"
+                                                ng-modal="PointOfContact.AlternativeNo" id="AlternativeNo"
+                                                name="Alternate Number" placeholder="Enter Alternative No">
+                                            <!--   value="{{choice.AlternativeNo}}" -->
+                                            <!-- <span for="AlternativeNo" class="error"
+                                            ng-show="AreaOprationsFrom.AlternativeNo.$invalid && showErrors">
+                                            Name is Required
+                                        </span> -->
+                                        </div>
+                                        <div class="col-md-2 ph10 mb5">
+                                            <textarea class="form-control" type="text"
+                                                ng-modal="PointOfContact.StreetAddress" id="StreetAddress"
+                                                name=" Address" placeholder="Enter Street Address"></textarea>
+                                            <!--   value="{{choice.StreetAddress}}" -->
+                                            <span for="StreetAddress" class="error"
+                                                ng-show="AreaOprationsFrom.StreetAddress.$invalid && showErrors">
+                                                Address is Required
+                                            </span>
+                                        </div>
+                                        <div class="col-md-1 ph10 mb5">
+                                            <button class="btn btn-primary pull-right" type="button"
+                                                ng-show="showAddChoice(PointOfContact)"
+                                                ng-click="addNewChoice(AreaOprationsFrom)">Add</button>
+                                        </div>
+                                        <div class="col-md-1 ph10 mb5">
+                                            <button class="btn btn-primary pull-right" type="button"
+                                                ng-click="removeNewChoice()">Remove </button>
+                                        </div>
+                                    </div>
+    /* Area Of Operation*/
+    $scope.PointOfContacts = [{ City: '', ContactName: '', ContactNo: '', AlternativeNo: '', StreetAddress: '', }];
+
+    $scope.addNewChoice = function (form) {
+        console.log(" Add New Row in Area of Operations....")
+        $scope.showErrors = form.$invalid;
+        if (form.$invalid) {
+            return;
+        }
+        var newItemNo = $scope.PointOfContacts.length + 1;
+        $scope.PointOfContacts.push({ 'id': 'choice' + newItemNo, City: '', ContactName: '', ContactNo: '', AlternativeNo: '', StreetAddress: '', });
+    };
+
+    $scope.removeNewChoice = function () {
+        var newItemNo = $scope.PointOfContacts.length - 1;
+        if (newItemNo !== 0) {
+            $scope.PointOfContacts.pop();
+        }
+    };
+
+    $scope.showAddChoice = function (PointOfContact) {
+        return PointOfContact.id === $scope.PointOfContacts[$scope.PointOfContacts.length - 1].id;
+    };

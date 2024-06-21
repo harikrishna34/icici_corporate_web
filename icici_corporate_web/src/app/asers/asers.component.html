@@ -1,0 +1,197 @@
+<div class="body-content">
+  <div class="content">
+
+
+    <div class="device-selection-content">
+      <div class="device-selection-list">
+        <button class="btn device-selection-list-item"
+          [style.background-color]="selectedButton === 0 ? '#914573' : 'initial'"
+          (click)="benificiaryDetails(this.customerDetails.customer.CustRecID,0)">
+          {{this.customerDetails.customer.Name}}
+        </button>
+      </div>
+      <div class="device-selection-list">
+        <button class="btn device-selection-list-item"
+          *ngFor="let Beneficiaries of this.customerDetails.customer.Beneficiaries; let i = index"
+          [style.background-color]="selectedButton === i + 1 ? '#914573' : 'initial'"
+          (click)="benificiaryDetails(Beneficiaries.CustID, i+1)">
+          {{Beneficiaries.Name}}
+        </button>
+      </div>
+    </div>
+
+    <div class="device-selection">
+      <div *ngIf="customerDeviceDetails.length < 1" class="device-not-found row">
+        <div class="col-md-5"></div>
+        <div class="no-data col-md-2">
+          <p>No Data Found</p>
+        </div>
+        <div class="col-md-8"></div>
+
+
+
+      </div>
+      <div class="device-selection-content" *ngIf="Devices.length > 0">
+        <div class="device-selection-list" *ngFor="let deviceObj of customerDeviceDetails">
+          <button class="btn device-selection-list-item"
+            (click)="onDeviceChange(deviceObj.UserDetails.CustomerID,deviceObj.DeviceDetails.IMEINumber)">
+            {{deviceObj.DeviceDetails?.Model}}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="device-dashboard">
+      <div class="card-container" *ngIf="DashboardData.length > 0">
+        <div class="card dashboard-card" *ngFor="let dashboardData of DashboardData">
+          <div class="card-body card-content" (click)="onSelectDataType(dashboardData,'Hour')">
+            <div class="content-image">
+              <img src="{{dashboardData.image}}" alt="...">
+            </div>
+            <div class="content-dashboard-data">
+              <span class="content-dashboard-data-tittle">{{dashboardData?.tittle}} : {{dashboardData.value}}</span>
+            </div>
+            <div class="content-dashboard-data-time">
+              <span class="content-dashboard-data-time">{{dashboardData.time *1000 | date:'dd-MM-yyyy hh:mm a'}}</span>
+            </div>
+            <div class="content-dashboard-data-download" *ngIf="dashboardData?.tittle==='Ecgdata'">
+              <span class="content-dashboard-data-ecg-action" (click)="onDownloadClick('')">Click Here to
+                Download</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="device-graph">
+          <div class="graph-content" *ngIf="isVitalTypeSelected && !isNotAChart">
+            <div class="time-type-list">
+              <button class="btn time-type-list-item" (click)="onTimeChangeClick('Hour')">Hour</button>
+              <button class="btn time-type-list-item" (click)="onTimeChangeClick('Day')">Day</button>
+              <button class="btn time-type-list-item" (click)="onTimeChangeClick('Week')">Week</button>
+              <button class="btn time-type-list-item" (click)="onTimeChangeClick('Month')">Month</button>
+            </div>
+            <div>
+              <div>
+                <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
+                  [dataLabels]="chartOptions.dataLabels" [grid]="chartOptions.grid" [stroke]="chartOptions.stroke"
+                  [title]="chartOptions.title"></apx-chart>
+              </div>
+            </div>
+          </div>
+          <div class="ecg-details" *ngIf="vitalType==='Ecgdata'">
+            <div class="time-type-list">
+              <button class="btn time-type-list-item" (click)="onTimeChangeForEcgClick('Hour')">Hour</button>
+              <button class="btn time-type-list-item" (click)="onTimeChangeForEcgClick('Day')">Day</button>
+              <button class="btn time-type-list-item" (click)="onTimeChangeForEcgClick('Week')">Week</button>
+              <button class="btn time-type-list-item" (click)="onTimeChangeForEcgClick('Month')">Month</button>
+            </div>
+            <div class="device-report-ecg">
+              <div class="card ecgdata-dashboard-card" *ngFor="let dashboardData of EcgData">
+                <div class="card-body ecgdata-dashboard-card-content row"
+                  (click)="onSelectDataType(dashboardData,'Hour')">
+                  <div class="col-md-6">
+                    <div class="ecgdata-dashboard-card-content-data">
+                      <label for='RRMax'>RRMax : </label>
+                      <span>{{dashboardData.Data?.RRMax}}</span>
+                    </div>
+                    <div class="ecgdata-dashboard-card-content-data">
+                      <label for='RRMax'>RRMin : </label>
+                      <span>{{dashboardData.Data?.RRMin}}</span>
+                    </div>
+                    <div class="ecgdata-dashboard-card-content-data">
+                      <label for='RRMax'>BR : </label>
+                      <span>{{dashboardData.Data?.BR}}</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="ecgdata-dashboard-card-content-data">
+                      <label for='RRMax'>AvgHR : </label>
+                      <span>{{dashboardData.Data?.AvgHR}}</span>
+                    </div>
+                    <div class="ecgdata-dashboard-card-content-data">
+                      <label for='RRMax'>HRV : </label>
+                      <span>{{dashboardData.Data?.HRV}}</span>
+                    </div>
+                    <div class="ecgdata-dashboard-card-content-data">
+                      <label for='RRMax'>Mood : </label>
+                      <span>{{dashboardData.Data?.Mood}}</span>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <label>{{dashboardData.CreatedDate*1000 | date:'dd-MM-yyyy hh:mm a'}}</label>
+                  </div>
+                  <div class="col-md-12 ">
+                    <label (click)="onDownloadClick(dashboardData.Data?.PDFFile)">Download</label>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <table class="table table-bordered">
+          <!-- <tr>
+            <th>RRMax</th>
+            <th>RRMin</th>
+            <th>BR</th>
+            <th>AvgHR</th>
+            <th>HRV</th>
+            <th>Mood</th>
+            <th>Created Date</th>
+            <th>Action</th>
+          </tr>
+          <tr *ngFor="let dashboardData of EcgData">
+            <td>{{ dashboardData.Data?.RRMax }}</td>
+            <td>{{ dashboardData.Data?.RRMin }}</td>
+            <td>{{ dashboardData.Data?.BR }}</td>
+            <td>{{ dashboardData.Data?.AvgHR }}</td>
+            <td>{{ dashboardData.Data?.HRV }}</td>
+            <td>{{ dashboardData.Data?.Mood }}</td>
+            <td>{{ dashboardData.CreatedDate * 1000 | date:'dd-MM-yyyy hh:mm a' }}</td>
+            <td>
+              <button class="btn btn-link" (click)="onDownloadClick(dashboardData.Data?.PDFFile)">Download</button>
+            </td>
+          </tr> -->
+          <tr>
+            <th>Company</th>
+            <th>Contact</th>
+            <th>Country</th>
+          </tr>
+          <tr>
+            <td>Alfreds Futterkiste</td>
+            <td>Maria Anders</td>
+            <td>Germany</td>
+          </tr>
+          <tr>
+            <td>Centro comercial Moctezuma</td>
+            <td>Francisco Chang</td>
+            <td>Mexico</td>
+          </tr>
+          <tr>
+            <td>Ernst Handel</td>
+            <td>Roland Mendel</td>
+            <td>Austria</td>
+          </tr>
+          <tr>
+            <td>Island Trading</td>
+            <td>Helen Bennett</td>
+            <td>UK</td>
+          </tr>
+          <tr>
+            <td>Laughing Bacchus Winecellars</td>
+            <td>Yoshi Tannamuri</td>
+            <td>Canada</td>
+          </tr>
+          <tr>
+            <td>Magazzini Alimentari Riuniti</td>
+            <td>Giovanni Rovelli</td>
+            <td>Italy</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>

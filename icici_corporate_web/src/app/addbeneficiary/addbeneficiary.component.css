@@ -1,0 +1,29 @@
+select:not(:-internal-list-box) {
+  overflow: none !important;
+}
+
+/* .faloicon1{
+  left: 100px;
+  right: 100px;
+  top: 0px;
+
+} */
+
+
+.search .faloicon1 {
+  position: absolute;
+  top: 30px;
+  left: 18px;
+  font-size: 30px;
+  color: #f2bf5e;
+}
+.bodycontentNew {
+  /* padding-top: 140px; */
+  margin-left: 20px;
+  margin-right: 30px;
+  position: relative;
+ 
+}
+input[type=text]{
+ padding-left: 25px;
+}

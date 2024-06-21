@@ -1,0 +1,38 @@
+.bodycontentNew {
+    /* padding-top: 140px; */
+    margin-left: 20px;
+    margin-right: 30px;
+    position: relative;
+   
+}
+
+.BookNowBtn{
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+    background: #d94165;
+    height: 46px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 0;
+    -moz-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    width:50%;
+}
+
+.BookNowBtnSubmit{
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+    background: #d94165;
+    height: 36px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 0;
+    -moz-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    border-radius: 20px;
+    width:20%;
+}

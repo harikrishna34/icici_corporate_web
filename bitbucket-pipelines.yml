@@ -1,0 +1,18 @@
+image: node:16.15.0
+
+pipelines:
+  default:
+        - step:
+            name: Install and build
+            script:
+              - cd icici_corporate_web/
+              - npm cache clean --force
+              - npm install --force
+              - npm install -g @angular/cli@16.2.11
+              - ng build
+              - scp -r ./dist/* ec2-user@65.0.254.136:~/
+        - step:
+            name: Deploy to EC2 Nginx
+            trigger: manual
+            script:      
+              - ssh ec2-user@65.0.254.136 sudo cp -Rf /home/ec2-user/icici_corporate_web/* /usr/share/nginx/dist/icici_corporate_web

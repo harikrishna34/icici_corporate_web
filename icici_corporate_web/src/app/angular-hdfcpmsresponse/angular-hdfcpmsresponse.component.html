@@ -1,0 +1,76 @@
+
+
+<!-- <div>
+    <div class="card" style="width: 48rem;">
+        <h3>Payment Failed</h3>
+        <table>
+            <tr> <td>Anvayaa Payment ID</td><td>:</td><td>{{hdfcPaymentResponse.AnvayaaPaymentID}}</td></tr>
+            <tr> <td>Transaction Id</td><td>:</td><td>{{hdfcPaymentResponse.GatewayTransactionID}}</td></tr>
+            <tr> <td>Payment INFO</td><td>:</td><td>{{hdfcPaymentResponse.PaymentFor}}</td></tr>
+            <tr> <td>Amount</td><td>:</td><td>{{hdfcPaymentResponse.Amount}}</td></tr>
+            <tr> <td>Transaction Time</td><td>:</td><td></td></tr>
+        </table>
+      </div>
+</div> -->
+
+<div class="bodycontent">
+
+
+    <!-- <div *ngIf="hdfcPaymentResponse.PaymentStatus==undefined">
+        <p id="notFound">Payment Details Not Found</p>
+    </div> -->
+    <div *ngIf="hdfcPaymentResponse.PaymentStatus!=undefined">
+        <div class="row"  >
+            <h1 *ngIf="hdfcPaymentResponse.AnvayaaPaymentStatus=='success'"><span style="color: #4BB543">Payment Success</span></h1>
+            <h1 *ngIf="hdfcPaymentResponse.AnvayaaPaymentStatus!='success'"><span style="color:#d71e38;">Payment Failed</span></h1>
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item " id="packageName"><span>Payment Details</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Payment
+                            ID<span>{{hdfcPaymentResponse.AnvayaaPaymentID?hdfcPaymentResponse.AnvayaaPaymentID:'-'}}</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Transaction Id
+                            <span>{{hdfcPaymentResponse.GatewayTransactionID?hdfcPaymentResponse.GatewayTransactionID:'-'}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">Price
+                            <span>{{hdfcPaymentResponse.Price?hdfcPaymentResponse.Price:'-'}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">Transaction Time
+                            <span>{{hdfcPaymentResponse.TransactionTime?hdfcPaymentResponse.TransactionTime:'-'}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">Bank ReferenceNumber
+                            <span *ngIf="hdfcPaymentResponse.AnvayaaPaymentStatus!='success'" >{{hdfcPaymentResponse.bank_ref_num?hdfcPaymentResponse.bank_ref_num:'-'}}</span>
+                            <span *ngIf="hdfcPaymentResponse.AnvayaaPaymentStatus=='success'">{{hdfcPaymentResponse.BankTransactionID}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="white" type="ball-scale-multiple" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>

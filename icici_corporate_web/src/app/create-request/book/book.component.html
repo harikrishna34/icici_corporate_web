@@ -1,0 +1,477 @@
+  <div class="bodycontentNew">
+    <style>
+      /*.order-summary {
+            position: relative;
+            padding: 30px 0 0;
+            background: #fff;
+            box-shadow: inset 0 0 0 1px #dfe3e7;
+          }
+          
+          .order-summary h2 {
+            position: relative;
+            font-size: 14px;
+            font-weight: 300;
+            text-transform: uppercase;
+            text-align: left;
+            letter-spacing: 3px;
+            padding: 0 25px;
+            color: #0e1422;
+          }
+          
+          .order-summary .__details li.event {
+            position: relative;
+            padding: 30px 25px;
+            border-bottom: 1px dashed #ccc;
+          }
+          
+          .order-summary .__details li h3 {
+            font-size: 16px;
+            color: #0e1422;
+            padding-bottom: 8px;
+          }
+          
+          .payments .payment-container .order-info .order-summary .__details li address {
+            font-size: 12px;
+            font-style: inherit;
+            padding-bottom: 13px;
+          }
+          */
+    </style>
+    <div *ngIf="!PaymentPage" class="modal-content">
+      <div class="modal-header model">
+        <h2 class="">{{serviceDetails.AliasName}}</h2>
+        <button type="button" class="anvayaa-back-button"><span><i class="fa fa-arrow-left" aria-hidden="true"
+              (click)="goBack()">Go Back</i></span>
+
+        </button>
+
+      </div>
+      <div class="modal-body appointment-modal request-bg">
+        <div class="row">
+          <div class="col-sm-4 req-form-border">
+            <div class="otherservices-card">
+              <form name="rescheduleform" role="form" [formGroup]="createRequest">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label for="" class="health-label">Select Date </label>
+                      <div class="input-group">
+                        <input class="form-control" type="datetime-local" formControlName="RequestedDate" required />
+
+                      </div>
+                      <span for="Requested" class="error"
+                        *ngIf='this.createRequest.controls["RequestedDate"].status=="INVALID" && this.continueBtn==true'>*
+                        Date is required</span>
+                    </div>
+                  </div>
+                </div>
+                <hr class="seperator">
+                <!-- {{serviceDetails.CategoryType}}{{serviceDetails.CategoryType}} -->
+                <div class="row"
+                  *ngIf="serviceDetails.CategoryType == 'HEALTH_CARE_ASSISTANCE' || serviceDetails.CategoryType == 'HOME_VISITS'">
+                  <div class="col-sm-12">
+                    <div class="form-group "    >
+                      <label for="email" class="health-label">Select Beneficiary</label>
+                      <select (change)="SelectBenficiary($event)" class="form-select" name="Customer"
+                        formControlName="Beneficiary" [required]="serviceDetails.CategoryType == 'HEALTH_CARE_ASSISTANCE'|| serviceDetails.CategoryType == 'HOME_VISITS'">
+                        <option class="form-select" selected value="" disabled>Select Beneficiary</option>
+                        <option value="{{user.CustID}}" *ngFor="let user of Beneficiary">
+                          {{user.Name}}</option>
+
+
+
+                      </select>
+                      <span class="error"
+                        *ngIf='this.createRequest.controls["Beneficiary"].status=="INVALID" && this.continueBtn==true'>
+                        Please Select Beneficiary</span>
+                    </div>
+                  </div>
+                </div>
+                <label>
+                  <!-- <label class="btn btn-link" ng-if="bookservice.OthersName" data-toggle="modal" data-target="#OtherRequest">Change {{bookservice.OthersName}} </label> -->
+                </label>
+                <hr class="seperator">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group ">
+                      <label for="email" class="health-label">Notes </label>
+                      <textarea formControlName="Comments" style="resize: none;" class="form-control placeholder"
+                        name="RecordName" class="form-control" placeholder="ex:Please ......... your message"
+                        ng-model="bookservice.Note" cols="3" name="test" rows="2"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12" ng-if="!OtherService.SubCategoriesData">
+                    <div class="form-group " ng-show="checkcode =='SR02' || ShowPayment =='Yes'">
+                      <div
+                        *ngIf="serviceDetails.OriginalPrice && serviceDetails.OriginalPrice > serviceDetails.TotalPrice">
+                        <strong style="font-size:15px;color:#1d315f;margin-bottom: 5px"
+                          *ngIf="serviceDetails.OriginalPrice">Price </strong>:<span class="pull-right ng-binding"
+                          style="text-decoration: line-through;">Rs {{serviceDetails.OriginalPrice}}/-</span>
+                      </div>
+                      <strong style="font-size:15px;color:#1d315f;margin-bottom: 5px"
+                        *ngIf="serviceDetails.OriginalPrice">Discount Price : </strong>
+                      <strong style="font-size:15px;color:#1d315f;margin-bottom: 5px"
+                        *ngIf="!serviceDetails.OriginalPrice">
+                      </strong>Price:<span class="pull-right ng-binding">Rs {{serviceDetails.TotalPrice}}/-</span>
+                      <br>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <input type="checkbox" formControlName="note" id="accept_terms" style="width: 20px;height: 20PX;"
+                      name="accept_terms" required>
+                    <span> I agree to the
+                      <a href="" style="color:blue"> terms and conditions </a> </span>
+                    <span for="Requested" class="error"
+                      *ngIf='this.createRequest.controls["note"].status=="INVALID" && this.continueBtn==true'> Please
+                      Accept terms and conditions</span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12" *ngIf="checkcode =='SR02' ">
+                    <label>
+                      <button class="btn btn-cta btn-wide formSubmit" (click)="checkRequest()">Continue Payment</button>
+                    </label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12" *ngIf="checkcode =='SR01' ">
+                    <p style="text-align:center;">
+                      <button type="button" class="btn btn-cta btn-wide formSubmit" (click)="callbackRequest()">Call
+                        Back</button>
+                    </p>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-sm-8">
+            <h2 class="product-details">Product Details</h2>
+            <div class="row" ng-if="!OtherService.SubCategoriesData">
+              <div class="col-sm-12">
+                <h4 class="service-includes">Service Includes</h4>
+                <span>
+                  <i class="fa fa-check" style="color:#39D1B1" aria-hidden="true"></i>
+                </span>
+                <span style="word-wrap: break-word;">{{serviceDetails.Description}}</span>
+              </div>
+              <div class="col-sm-12">
+                <h4 class="service-includes"> Price ,Terms & Conditions</h4>
+                <div *ngFor="let ScopeOfService of serviceDetails.ScopeOfService"> <span> <i class="fa fa-check"
+                      style="color:#39D1B1" aria-hidden="true"></i></span>
+                  <span>{{ScopeOfService.Note}}
+                  </span>
+                </div>
+                <div *ngFor="let TermsAndConditions of serviceDetails.TermsAndConditions"> <span> <i class="fa fa-check"
+                      style="color:#39D1B1" aria-hidden="true"></i></span>
+                  <span>{{TermsAndConditions.Note}} </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="PaymentPage">
+
+
+      <div class="row">
+        <div class="col-sm-12 col-lg-8">
+          <div class="link-box">Payment Options</div>
+          <div class="details-card">
+            <div class="">
+              <!--  <div class="col-sm-12">
+                    <h3 class="icon-checkout pull-left">Select a payment method</h3>
+                    <h5 class="qnt pull-right txt-red"><img src="{{OtherService.OtherIconFiles.iosandweb}} " style="height:40px;width:40px">{{OtherService.AliasName}} </h5>
+                  </div>
+                  <div class="col-sm-12 details-row">
+                    <h5 class="icon-barcode pull-left">Amount To Paid</h5>
+                    <h5 class="icon-rupee pull-right txt-red">{{OtherService.TotalPrice}} </h5>
+                  </div> -->
+              <div class="row">
+                <div class="col-sm-4">
+                  <aside class="payment-card">
+                    <input class="PaymentTypes" (click)="paytmCreatePaymentDetails('Paytm')" type="radio" value="Paytm" name="paymentmode"
+                    >
+                    <label><span><img src="../../../assets/images/paytm.png" alt=""></span><span></span></label>
+                    <label style="align-items: center;">Paytm</label>
+                    
+                  </aside>
+                </div>
+                <div class="col-sm-4">
+                  <aside class="payment-card">
+                    <input class="PaymentTypes"  type="radio" value="HDFC" ng-model="bookservice.PaymentMode" name="paymentmode"
+                      (click)="HDFCCreatePaymentDetails('HDFC')">
+                    <label><span><img src="../../../assets/images/transaction.png" style="width: 100px;" class="pgimage"
+                          alt=""></span><span></span></label>
+                    <label>Credit/Debit/Netbanking</label>
+                  </aside>
+                </div>
+                <div class="col-sm-4">
+                  <aside class="payment-card">
+                    <input class="PaymentTypes"  type="radio" value="Cash" ng-model="bookservice.PaymentMode" name="paymentmode"
+                      (click)="Offline('Cash')">
+                    <label><span><img src="../../../assets/images/Cash.png" class="pgimage"
+                          alt=""></span><span></span></label>
+                    <label>Cash</label>
+                  </aside>
+                </div>
+                <div class="col-sm-4">
+                  <aside class="payment-card">
+                    <input class="PaymentTypes"  type="radio" value="Cheque" name="paymentmode" (click)="Offline('Cheque')">
+                    <label><span><img src="../../../assets/images/cheque.png" class="pgimage"
+                          alt=""></span><span></span></label>
+                    <label>Cheque</label>
+                  </aside>
+                </div>
+                <div class="col-sm-4">
+                  <aside class="payment-card">
+                    <input class="PaymentTypes"  type="radio" value="Wiretransfer" name="paymentmode" (click)="Offline('Wiretransfer')">
+                    <label><span><img src="../../../assets/images/bank-transfer1.png" class="pgimage"
+                          alt=""></span><span></span></label>
+                    <label>WireTransfer</label>
+                  </aside>
+                </div>
+                <div class="col-sm-4" *ngIf="pmsValidation">
+                  <aside class="payment-card">
+                    <input class="PaymentTypes"  type="radio" value="PMS"  name="paymentmode"
+                      (click)="Offline('PMS')">
+                    <label><span><img src="../../../assets/images/wallet.png" style="width: 100px;" class="pgimage"
+                          alt=""></span><span></span></label>
+                    <label>PMS</label>
+                  </aside>
+                </div>
+                <div class="col-md-6" *ngIf="this.PaymentMode == 'Paytm'">
+                  <div class="">
+                    <table class="table" id="basic-invoice-result">
+                      <thead>
+                        <tr>
+                          <th>
+                            <b>Sub Total:</b>
+                          </th>
+                          <th>Rs {{bookservice.Price}}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <b>Taxes</b>
+                          </td>
+                          <td>Rs 0</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <b>Transaction Charges
+                              ({{bookservice.PaytmChargesPercentage}} %)</b>
+                          </td>
+                          <td>Rs {{bookservice.PaytmTransactionCharges}}</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <b>Total</b>
+                          </td>
+                          <td>Rs {{bookservice.TotalPrice}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <html>
+
+                    <head>
+                    </head>
+
+                    <body *ngIf="paytmres">
+                      <form #paytmForm action='https://secure.paytm.in/oltp-web/processTransaction' method='post'>
+                        <input type="hidden" name="Name" value="{{userDetails.customer.Name}}" />
+                        <input type="hidden" name="MID" value="{{paytmres.MID}}" />
+                        <input type="hidden" name="CHANNEL_ID" value="{{paytmres.CHANNEL_ID}}" />
+                        <input type="hidden" name="CHECKSUMHASH" value="{{paytmres.CHECKSUMHASH}}" />
+                        <input type="hidden" name="CUST_ID" value="{{paytmres.CUST_ID}}" />
+                        <input type="hidden" name="EMAIL" value="{{paytmres.EMAIL}}" />
+                        <input type="hidden" name="INDUSTRY_TYPE_ID" value="{{paytmres.INDUSTRY_TYPE_ID}}" />
+                        <input type="hidden" name="CALLBACK_URL" value="{{paytmres.CALLBACK_URL}}" />
+                        <input type="hidden" name="MID" value="{{paytmres.MID}}" />
+                        <input type="hidden" name="MOBILE_NO" value="{{paytmres.MOBILE_NO}}" />
+                        <input type="hidden" name="ORDER_DETAILS" value="{{paytmres.ORDER_DETAILS}}" />
+                        <input type="hidden" name="ORDER_ID" value="{{paytmres.ORDER_ID}}" />
+                        <input type="hidden" name="REQUEST_TYPE" value="{{paytmres.REQUEST_TYPE}}" />
+                        <input type="hidden" name="TXN_AMOUNT" value="{{paytmres.TXN_AMOUNT}}" />
+                        <input type="hidden" name="WEBSITE" value="{{paytmres.WEBSITE}}" />
+                        <input type="submit" class="btn btn-cta btn-wide formSubmit" value="Continue Payment"
+                          (click)="paytmForm.submit()" class="anvayaa-btn-lg "
+                          [hidden]="paytmres && bookservice.PaymentMode == 'Paytm'">
+                      </form>
+                    </body>
+
+                    </html>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="col-md-6" *ngIf="this.PaymentMode == 'HDFC'">
+                  <table class="table" id="basic-invoice-result">
+                    <thead>
+                      <tr>
+                        <th>
+                          <b>Sub Total:</b>
+                        </th>
+                        <th>Rs {{bookserviceHDFC.Price}}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <b>Taxes</b>
+                        </td>
+                        <td>Rs 0</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <b>Transaction Charges ({{bookserviceHDFC.HDFCChargesPercentage}} %)</b>
+                        </td>
+                        <td>Rs {{bookserviceHDFC.HDFCTransactionCharges}}</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <b>Total</b>
+                        </td>
+                        <td>Rs {{bookserviceHDFC.TotalPrice}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <html>
+
+                  <head>
+                  </head>
+
+                  <body>
+                    <form #HDFCPyament action='https://secure.payu.in/_payment' method='post'>
+                      <input type="hidden" name="firstname" value="{{paymentconfig.firstname}}" />
+                      <input type="hidden" name="surl" value="{{paymentconfig.surl}}" />
+                      <input type="hidden" name="phone" value="{{paymentconfig.phone}}" />
+                      <input type="hidden" name="key" value="{{paymentconfig.key}}" />
+                      <input type="hidden" name="hash" value="{{paymentconfig.hash}}" />
+                      <input type="hidden" name="curl" value="{{paymentconfig.curl}}" />
+                      <input type="hidden" name="furl" value="{{paymentconfig.furl}}" />
+                      <input type="hidden" name="txnid" value="{{paymentconfig.txnid}}" />
+                      <input type="hidden" name="productinfo" value="{{paymentconfig.productinfo}}" />
+                      <input type="hidden" name="amount" value="{{paymentconfig.amount}}" />
+                      <input type="hidden" name="email" value="{{paymentconfig.email}}" />
+                      <input type="submit" class="btn btn-cta btn-wide formSubmit" (click)="HDFCPyament.submit()"
+                        value="Continue Payment" *ngIf="this.PaymentMode == 'HDFC'">
+                    </form>
+                  </body>
+
+                  </html>
+                </div>
+              </div>
+              <hr class="seperator">
+              <div class="row">
+                <div class="col-sm-12 form-group" *ngIf="PaymentType == 'Offline'">
+                  <div class="col-sm-4">
+                  </div>
+                  <div class="col-sm-4">
+                    <button (click)="CreateRequestNew()" class="btn btn-cta btn-wide formSubmit">Pay Now</button>
+                  </div>
+                  <div class="col-sm-4">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false"
+        id="OtherRequest" role="dialog">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header OtherRequestModal">
+              <button type="button" class="close" ng-click="CloseOtherRequest()">&times;</button>
+              <h4 class="modal-title OtherRequestheader">Add Contact Details</h4>
+            </div>
+            <form name="OtherRequestForm">
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="email" class="health-label" style="color:#1d315f;"> Name </label>
+                  <div class="">
+                    <input class="form-control ng-pristine ng-untouched ng-valid ng-empty" type="text"
+                      ng-required="bookservice.RequestFor == 'Other'" ng-model="bookservice.OthersName" name="OthersName"
+                      placeholder="Name">
+                  </div>
+                  <span for="Requested" class="error" ng-show="OtherRequestForm.OthersName.$invalid && showError"> Enter
+                    Name</span>
+                </div>
+                <div class="form-group">
+                  <label for="email" class="health-label" style="color:#1d315f;"> Mobile Number </label>
+                  <div class="">
+                    <input class="form-control ng-pristine ng-untouched ng-valid ng-empty" type="text"
+                      ng-required="bookservice.RequestFor == 'Other'" ng-model="bookservice.OthersMobileNumber"
+                      name="OthersMobileNumber" data-ng-pattern="/^[0]?[789]\d{9}$/" placeholder="Mobile Number">
+                  </div>
+                  <span for="Requested" class="error" ng-show="OtherRequestForm.OthersMobileNumber.$invalid && showError">
+                    Enter Mobile Number</span>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" ng-click="CloseOtherRequest()">Cancel</button>
+                <button type="button" class="btn btn-success" ng-click="SaveOtherRequest(OtherRequestForm)">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="orderfix" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header model">
+              <button type="button" class="close" ng-click="orderclose()">&times;</button>
+              <h4 class="modal-title header">Order Received</h4>
+            </div>
+            <div class="modal-body appointment-modal">
+              <div class="row">
+                <div class="col-sm-12 details-row text-center">
+                  <img src="../../../assets/images/confirmation_512.png " height="150">
+                </div>
+                <div class="col-sm-12 details-row text-center">
+                  <h2 style="font-weight: 300">Request is Received , we will contact You Shortly.</h2>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="anvayaa-btn-lg pull-right" ng-click="orderclose()"
+                data-dismiss="modal">ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="alerttrigger" role="dialog" aria-hidden="true" data-backdrop="static"
+        data-keyboard="false">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header model">
+              <button type="button" class="close" ng-click="orderclose()">&times;</button>
+              <h4 class="modal-title header">Request</h4>
+            </div>
+            <div class="modal-body appointment-modal">
+              <div class="row">
+                <div class="col-sm-12 details-row text-center">
+                  <h2 style="font-weight: 300">Sorry! Currently Service Unavailable</h2>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="anvayaa-btn-lg pull-right" ng-click="orderclose()"
+                data-dismiss="modal">ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#914573" type = "ball-spin-clockwise" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>

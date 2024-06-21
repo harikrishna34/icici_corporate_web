@@ -1,0 +1,897 @@
+
+                <!-- border: 1px solid #914573; -->
+                <div class="panel-group" id="accordion-custom">
+                    <!-- Business Information -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion-custom"
+                            href="#collapseOne">
+                            <!--  -->
+                            <div class="row">
+                                <div class="col-md-6 ph10 mb5">
+                                    <h4 class="panel-title">
+                                        <a>Business Information</a>
+                                    </h4>
+                                </div>
+                                <div class="col-md-6 ph10 mb5">
+                                    <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse">
+                            <div class="panel-body" style="margin-top: 10px; padding: 0px">
+                                <form name="BusinessInformationForm" role="form" novalidate show-validation>
+
+                                    <div class="row allcp-form">
+                                        <div class="col-md-12 ph10 mb5">
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead;">Partner Type</h6>
+                                                <label for="PartnerType" class="field select">
+                                                    <select ng-model="BusinessInformationObj.PartnerType"
+                                                        name="PartnerType" id="PartnerType" required>
+                                                        <option selected value="">Select Vendor Type</option>
+                                                        <option value="Internal">Internal Vendor</option>
+                                                        <option value="External">External Vendor</option>
+                                                    </select>
+                                                    <i class="arrow double"></i>
+                                                </label>
+                                                <span for="PartnerType" class="error"
+                                                    ng-show="BusinessInformationForm.PartnerType.$invalid && showErrors">
+                                                    Vendor Type is Required
+                                                </span>
+                                            </div>
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead">Business Name</h6>
+                                                <input class=" form-control" type="text"
+                                                    ng-model="BusinessInformationObj.PartnerName" name="PartnerName"
+                                                    id="PartnerName" placeholder="Business Name" required>
+                                                <span for="PartnerName" class="error"
+                                                    ng-show="BusinessInformationForm.PartnerName.$invalid && showErrors">
+                                                    Business Name is Required
+                                                </span>
+
+                                            </div>
+
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead">Contact Person Name</h6>
+                                                <input class="form-control" type="text"
+                                                    ng-model="BusinessInformationObj.ContactName" name="ContactName"
+                                                    id="ContactName" placeholder="Contact Person Name"
+                                                    data-ng-pattern='/^[A-Za-z\s]+$/' required>
+                                                <span for="ContactName" class="error"
+                                                    ng-show="BusinessInformationForm.ContactName.$invalid && showErrors">
+                                                    Contact Person Name is Required </span>
+                                                <span for="ContactName" class="error"
+                                                    ng-if="BusinessInformationForm.ContactName.$error.pattern">
+                                                    Name must be alphabets only</span>
+                                            </div>
+
+
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead">Partner Contact Number</h6>
+                                                <input class="form-control" type="text"
+                                                    ng-model="BusinessInformationObj.ContactNo" name="ContactNo"
+                                                    id="ContactNo" placeholder="Contact Person Name"
+                                                    data-ng-pattern='/^(6|7|8|9)\d{9}$/' required>
+                                                <span for="ContactNo" class="error"
+                                                    ng-show="BusinessInformationForm.ContactNo.$invalid && showErrors">
+                                                    Contact Number Name is Required </span>
+                                                <span for="ContactNo" class="error"
+                                                    ng-if="BusinessInformationForm.ContactNo.$error.pattern">
+                                                    Enter valid Contact Number</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 ph10 mb5">
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead">Bussiness Email Id</h6>
+                                                <input class="form-control" type="text"
+                                                    ng-model="BusinessInformationObj.EmailID" name="EmailID"
+                                                    id="EmailID" placeholder="Enter EmailID"
+                                                    data-ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required>
+                                                <span for="EmailID" class="error"
+                                                    ng-show="BusinessInformationForm.EmailID.$invalid && showErrors">
+                                                    Email is Required </span>
+                                                <span for="EmailID" class="error"
+                                                    ng-if="BusinessInformationForm.EmailID.$error.pattern">
+                                                    Enter Valid EmailID</span>
+                                            </div>
+
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead;">Company Type</h6>
+                                                <label for="BusinessNature" class="field select">
+                                                    <select ng-model="BusinessInformationObj.BusinessNature"
+                                                        name="BusinessNature" id="BusinessNature" style="height: 36px;"
+                                                        required>
+                                                        <option selected value="">Select Company Type</option>
+                                                        <option value="Pvt_LTD">Pvt_LTD</option>
+                                                        <option value="Partnership">Partnership</option>
+                                                        <option value="Propritorship">Propritorship</option>
+
+                                                    </select>
+                                                    <i class="arrow double" style="top: 5px"></i>
+                                                </label>
+                                                <span for="BusinessNature" class="error"
+                                                    ng-show="BusinessInformationForm.BusinessNature.$invalid && showErrors">
+                                                    Company Type is Required
+                                                </span>
+                                            </div>
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead;">Bussiness Start Date</h6>
+                                                <div class="input-group date" id="BussinessStartDate">
+                                                    <input class="form-control" name="BussinessStartDate"
+                                                        id="Bussdatepicker" placeholder="Bussiness Start Date "
+                                                        ng-model="BusinessInformationObj.BusinessStartDate" required
+                                                        style="height: 42px;">
+                                                    <span class="input-group-addon"><img
+                                                            src="images/calendar_1x.png" /></span>
+                                                </div>
+                                                <span for="BussinessStartDate" class="error"
+                                                    ng-show="BusinessInformationForm.BussinessStartDate.$invalid && showErrors">
+                                                    Date is Required </span>
+                                            </div>
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead; ">Experience </h6>
+                                                <input class="form-control" type="text"
+                                                    ng-model="BusinessInformationObj.Experience" name="Experience"
+                                                    id="Experience" placeholder="Year Of Experience" readonly required
+                                                    data-ng-pattern="/^(0|[1-9][0-9]*)$/">
+                                                <span for="Experience" class="error"
+                                                    ng-show="BusinessInformationForm.Experience.$invalid && showErrors">
+                                                    Experience is Required
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 ph10 mb5">
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead;">Pan Number</h6>
+                                                <input class="form-control" type="text" id="PanNumber"
+                                                    ng-model="BusinessInformationObj.PanNumber" name="PanNumber"
+                                                    placeholder="Pan No"
+                                                    data-ng-pattern="/^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}$/" required>
+                                                <span for="PanNumber" class="error"
+                                                    ng-show="BusinessInformationForm.PanNumber.$invalid && showErrors">
+                                                    PanCard Number is Required </span>
+                                                <span for="PanNumber" class="error"
+                                                    ng-if="BusinessInformationForm.PanNumber.$error.pattern">
+                                                    Enter Valid Pan Number.</span>
+                                            </div>
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead;">GST Number</h6>
+                                                <input class="form-control" type="text"
+                                                    ng-model="BusinessInformationObj.GSTNumber" name="GSTNumber"
+                                                    id="GSTNumber" placeholder="GST No"
+                                                    data-ng-pattern="/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/">
+                                                <span for="GSTNumber" class="error"
+                                                    ng-if="BusinessInformationForm.GSTNumber.$error.pattern">
+                                                    Enter Valid GST Number.</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 ph10 mb5">
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6>Bussiness Address Details</h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 ph10 mb5">
+
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead">Bussiness Address</h6>
+                                                <textarea class="form-control"
+                                                    ng-model="BusinessInformationObj.StreetAddress" name="StreetAddress"
+                                                    id="StreetAddress" placeholder="Business Address"
+                                                    style="height: 35px;" required>  </textarea>
+                                                <span for="StreetAddress" class="error"
+                                                    ng-show="BusinessInformationForm.StreetAddress.$invalid && showErrors">
+                                                    Bussiness Address is Required</span>
+                                            </div>
+
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead">LandMark </h6>
+                                                <textarea class="form-control"
+                                                    ng-model="BusinessInformationObj.LandMark" name="LandMark"
+                                                    id="LandMark" placeholder="LandMark Address" style="height: 35px;"
+                                                    required>  </textarea>
+                                                <span for="LandMark" class="error"
+                                                    ng-show="BusinessInformationForm.LandMark.$invalid && showErrors">
+                                                    LandMark is Required</span>
+                                            </div>
+
+
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead">City</h6>
+                                                <input class="form-control" type="text"
+                                                    ng-model="BusinessInformationObj.City" name="City" required
+                                                    id="City" placeholder="City">
+                                                <span for="City" class="error"
+                                                    ng-show="BusinessInformationForm.City.$invalid && showErrors">
+                                                    City is Required </span>
+                                            </div>
+
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead">State</h6>
+                                                <input class="form-control" type="text"
+                                                    ng-model="BusinessInformationObj.State" name="State" required
+                                                    id="State" placeholder="State">
+                                                <span for="State" class="error"
+                                                    ng-show="BusinessInformationForm.State.$invalid && showErrors">
+                                                    State is Required </span>
+                                            </div>
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead">Pin Code</h6>
+                                                <input class="form-control" type="text"
+                                                    ng-model="BusinessInformationObj.PinCode" name="PinCode"
+                                                    id="PinCode" placeholder="Pin Code"
+                                                    data-ng-pattern="/^[1-9][0-9]{5}$/" required>
+                                                <span for="PinCode" class="error"
+                                                    ng-show="BusinessInformationForm.PinCode.$invalid && showErrors">
+                                                    PinCode is Required </span>
+                                                <span for="PinCode" class="error"
+                                                    ng-if="BusinessInformationForm.PinCode.$error.pattern">
+                                                    Enter Valid PinCode</span>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-md-12 ph10 mb5">
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6>Point Of Contact Details</h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 ph10 mb5">
+
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead">Contact Person Name</h6>
+                                                <input class="form-control" type="text"
+                                                    ng-model="BusinessInformationObj.PointOfContact.ContactName"
+                                                    name="ContactName" id="ContactName"
+                                                    placeholder="Contact Person Name" required>
+                                                <span for="ContactName" class="error"
+                                                    ng-show="BusinessInformationForm.ContactName.$invalid && showErrors">
+                                                    Contact Person Name is Required
+                                                </span>
+                                            </div>
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead">Contact Person Number</h6>
+                                                <input class="form-control" type="text"
+                                                    ng-model="BusinessInformationObj.PointOfContact.ContactNo"
+                                                    name="ContactNo" id="ContactNo" placeholder="Contact No"
+                                                    data-ng-pattern='/^(6|7|8|9)\d{9}$/' required>
+                                                <span for="ContactNo" class="error"
+                                                    ng-show="BusinessInformationForm.ContactNo.$invalid && showErrors">
+                                                    Contact Number is Required
+                                                </span>
+                                                <span for="ContactNo" class="error"
+                                                    ng-if="BusinessInformationForm.ContactNo.$error.pattern ">
+                                                    Enter Valid Contact Number</span>
+                                            </div>
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead">Contact Person Email ID</h6>
+                                                <input class="form-control" type="text"
+                                                    ng-model="BusinessInformationObj.PointOfContact.EmailID"
+                                                    name="EmailID" id="EmailID" placeholder="Enter Email ID"
+                                                    data-ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required>
+                                                <span for="EmailID" class="error"
+                                                    ng-if="BusinessInformationForm.EmailID.$invalid && showErrors">
+                                                    Enter Valid Contact Number</span>
+                                                <span for="EmailID" class="error"
+                                                    ng-if="BusinessInformationForm.EmailID.$error.pattern ">
+                                                    Enter Valid Email ID</span>
+                                            </div>
+                                            <!-- <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead">Contact Person Alternate Number</h6>
+                                                <input class="form-control" type="text"
+                                                    ng-model="BusinessInformationObj.PointOfContact.AlternativeNo" name="AlternativeNo"
+                                                    id="AlternativeNo" placeholder="Alternative Contact No"
+                                                    data-ng-pattern='/^[0-9]+$/'>
+                                                <span for="AlternativeNo" class="error"
+                                                    ng-if="BusinessInformationForm.AlternativeNo.$error.pattern ">
+                                                    Enter Valid Contact Number</span>
+                                            </div> -->
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead">Contact Person Address</h6>
+                                                <textarea class="form-control" type="text"
+                                                    ng-model="BusinessInformationObj.PointOfContact.StreetAddress"
+                                                    name="StreetAddress" required id="StreetAddress"
+                                                    placeholder="Address Details" style="height: 36px;"></textarea>
+                                                <span for="StreetAddress" class="error"
+                                                    ng-show="BusinessInformationForm.StreetAddress.$invalid && showErrors">
+                                                    Address is Required
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-12 ph10 mb5">
+                                            <button class="btn btn-primary pull-right" type="button"
+                                                style="margin-top: 35px;"
+                                                ng-click="createBusinessInformation(BusinessInformationForm)">Save</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Area Of Operation -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion-custom"
+                            href="#collapseTwo">
+                            <div class="row">
+                                <div class="col-md-6 ph10 mb5">
+                                    <h4 class="panel-title">
+                                        <a>Area Of Operation</a>
+                                    </h4>
+                                </div>
+                                <div class="col-md-6 ph10 mb5">
+                                    <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                            <div class="panel-body" style="margin-top: 10px; padding: 0px">
+                                <form name="AreaOprationsForm" role="form" novalidate show-validation>
+
+                                    <div class="row allcp-form">
+                                        <div class="col-md-2 ph10 mb5">
+                                            <h6 style="color: #9b9ead">City</h6>
+
+                                        </div>
+                                        <div class="col-md-2 ph10 mb5">
+                                            <h6 style="color: #9b9ead">Contact Name</h6>
+
+                                        </div>
+                                        <div class="col-md-2 ph10 mb5">
+                                            <h6 style="color: #9b9ead">Contact Number</h6>
+
+                                        </div>
+                                        <div class="col-md-2 ph10 mb5">
+                                            <h6 style="color: #9b9ead">Alternate Number</h6>
+
+                                        </div>
+                                        <div class="col-md-2 ph10 mb5">
+                                            <h6 style="color: #9b9ead">Address</h6>
+
+                                        </div>
+
+                                        <div class="col-md-1 ph10 mb5">
+                                            <h6 style="color: #9b9ead">Add</h6>
+                                        </div>
+                                        <div class="col-md-1 ph10 mb5">
+                                            <h6 style="color: #9b9ead">Remove</h6>
+                                        </div>
+                                    </div>
+
+                                    <div class="row allcp-form" ng-repeat="PointOfContact in PointOfContacts">
+                                        <div class="col-md-12 ph10 mb5">
+
+                                            <div class="col-md-2 ph10 mb5">
+                                                <label for="City" class="field select">
+                                                    <select ng-model="PointOfContact.City" name="City" id="City"
+                                                        required>
+                                                        <option selected value="">Select City</option>
+                                                        <option ng-repeat="city in ServiceAreaCityName"
+                                                            value="{{city.CityID}}"> {{city.CityName}}</option>
+                                                    </select>
+                                                    <i class="arrow double"></i>
+                                                </label>
+                                                <span for="City" class="error"
+                                                    ng-show="AreaOprationsForm.City.$invalid && showErrors && !PointOfContact.City &&($index ==index)">
+                                                    City is Required
+                                                </span>
+
+                                            </div>
+                                            <div class="col-md-2 ph10 mb5">
+                                                <input class="form-control" type="text"
+                                                    ng-model="PointOfContact.ContactName" id="ContactName"
+                                                    name="ContactName" placeholder="Enter Name" required>
+                                                <span for="ContactName" class="error"
+                                                    ng-show="AreaOprationsForm.ContactName.$invalid && showErrors && !PointOfContact.ContactName &&($index ==index)">
+                                                    Name is Required
+                                                </span>
+                                            </div>
+                                            <div class="col-md-2 ph10 mb5">
+                                                <input class="form-control" type="text"
+                                                    ng-model="PointOfContact.ContactNo" id="ContactNo" name="ContactNo"
+                                                    placeholder="Contact Number" required>
+                                                <span for="ContactNo" class="error"
+                                                    ng-show="AreaOprationsForm.ContactNo.$invalid && showErrors && !PointOfContact.ContactNo &&($index ==index)">
+                                                    Number is Required
+                                                </span>
+                                            </div>
+                                            <div class="col-md-2 ph10 mb5">
+                                                <input class="form-control" type="text"
+                                                    ng-model="PointOfContact.AlternativeNo" id="AlternativeNo"
+                                                    name="Alternate Number" placeholder="Enter Alternative No">
+                                                <!-- <span for="AlternativeNo" class="error"
+                                                ng-show="AreaOprationsForm.AlternativeNo.$invalid && showErrors && !PointOfContact.AlternativeNo &&($index ==index)">
+                                                Contact Number is Required
+                                            </span> -->
+                                            </div>
+                                            <div class="col-md-2 ph10 mb5">
+                                                <textarea class="form-control" type="text"
+                                                    ng-model="PointOfContact.StreetAddress" id="StreetAddress"
+                                                    name=" StreetAddress" placeholder="Enter Street Address"
+                                                    required></textarea>
+                                                <span for="StreetAddress" class="error"
+                                                    ng-show="AreaOprationsForm.StreetAddress.$invalid && showErrors && !PointOfContact.StreetAddress &&($index ==index)">
+                                                    Address is Required
+                                                </span>
+                                            </div>
+                                            <div class="col-md-1 ph10 mb5">
+                                                <button class="btn btn-primary " type="button"
+                                                    ng-show="showAddChoice(PointOfContact)"
+                                                    ng-click="addNewChoice(PointOfContact,AreaOprationsForm,$index)"><i
+                                                        class="fas fa-plus"></i></button>
+                                            </div>
+                                            <div class="col-md-1 ph10 mb5">
+                                                <button class="btn btn-primary " type="button"
+                                                    style="background-color: red;" ng-click="removeNewChoice()"><i
+                                                        class="fas fa-minus"></i> </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 ph10 mb5">
+                                            <button class="btn btn-primary pull-right" type="button"
+                                                ng-click="saveAreaOperations(PointOfContact,AreaOprationsForm,$index)">Save
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row allcp-form">
+
+                                    </div>
+
+
+
+                                </form>
+
+
+
+
+
+                                <!-- <TABLE id="dataTable" width="350px" border="1">
+                                    <TR>
+                                        <TD><INPUT type="checkbox" name="chk" /></TD>
+                                        <TD> 1 </TD>
+                                        <TD> <INPUT type="text" /> </TD>
+                                        <TD> <INPUT type="button" value="Add Row" ng-click="addRow(' dataTable')" />
+                                            </TD>
+                                            <TD> <INPUT type="button" value="Delete Row"
+                                                    ng-click="deleteRow('dataTable')" />
+                                            </TD>
+
+                                            </TR>
+                                            </TABLE> -->
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Bank Details -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion-custom"
+                            href="#collapseThree">
+                            <div class="row">
+                                <div class="col-md-6 ph10 mb5">
+                                    <h4 class="panel-title">
+                                        <a>Bank Details</a>
+                                    </h4>
+                                </div>
+                                <div class="col-md-6 ph10 mb5">
+                                    <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body" style="margin-top: 10px; padding: 0px">
+                                <form name="BankDetailsForm" role="form" novalidate show-validation>
+                                    <div class="row allcp-form">
+                                        <div class="col-md-12 ph10 mb5">
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead">Bank Name</h6>
+                                                <input class="form-control" type="text"
+                                                    ng-model="BankDetailsObj.BankName" name="BankName" id="BankName"
+                                                    placeholder="Bank Name" required>
+                                                <span for="BankName" class="error"
+                                                    ng-show="BankDetailsForm.BankName.$invalid && showErrors">
+                                                    Bank Name is Required
+                                                </span>
+                                            </div>
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead">Account Number</h6>
+                                                <input class="form-control" type="text"
+                                                    ng-model="BankDetailsObj.AccountNumber" name="AccountNumber"
+                                                    id="AccountNumber" placeholder="Account Number " required>
+                                                <span for="AccountNumber" class="error"
+                                                    ng-show="BankDetailsForm.AccountNumber.$invalid && showErrors">
+                                                    Account Number is Required
+                                                </span>
+                                            </div>
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead">Re-Enter Account Number</h6>
+                                                <input class="form-control" type="text"
+                                                    ng-model="BankDetailsObj.ReEnterAccountNumber"
+                                                    name="ReEnterAccountNumber" id="ReEnterAccountNumber"
+                                                    placeholder="Account Number " required>
+                                                <span for="ReEnterAccountNumber" class="error"
+                                                    ng-show="BankDetailsForm.ReEnterAccountNumber.$invalid && showErrors">
+                                                    Re-Enter Account Number is Required
+                                                </span>
+                                            </div>
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead">Account Type</h6>
+                                                <input class="form-control" type="text"
+                                                    ng-model="BankDetailsObj.AccountType" name="AccountType"
+                                                    id="AccountType" placeholder="Account Type" required>
+                                                <span for="AccountType" class="error"
+                                                    ng-show="BankDetailsForm.AccountType.$invalid && showErrors">
+                                                    Account Type is Required
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-12 ph10 mb5">
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead">Enter IFSCCode</h6>
+                                                <input class="form-control" type="text"
+                                                    ng-model="BankDetailsObj.IFSCCode" name="IFSCCode" id="IFSCCode"
+                                                    placeholder="Enter IFSC Code " style="height: 36px;"
+                                                    data-ng-pattern="/^[A-Z]{4}0[A-Z0-9]{6}$/" required>
+                                                <span for="IFSCCode" class="error"
+                                                    ng-show="BankDetailsForm.IFSCCode.$invalid && showErrors">
+                                                    IFSCCode is Required
+                                                </span>
+                                            </div>
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead">Enter Branch</h6>
+                                                <input class="form-control" type="text" ng-model="BankDetailsObj.Branch"
+                                                    name="Branch" required id="Branch" placeholder="Enter Branch"
+                                                    style="height: 36px;">
+                                                <!-- <span for="Branch" class="error"
+                                                    ng-show="BankDetailsForm.Branch.$invalid && showErrors">
+                                                    Branch is Required
+                                                </span> -->
+                                            </div>
+                                            <div class="col-md-6 ph10 mb5">
+                                                <button class="btn btn-primary pull-right" type="button"
+                                                    style="margin-top: 35px;"
+                                                    ng-click="createBankDetails(BankDetailsForm)">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Services Details -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion-custom"
+                            href="#collapseFour">
+                            <div class="row">
+                                <div class="col-md-6 ph10 mb5">
+                                    <h4 class="panel-title">
+                                        <a>Services Details</a>
+                                    </h4>
+                                </div>
+                                <div class="col-md-6 ph10 mb5">
+                                    <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse">
+                            <div class="panel-body" style="margin-top: 10px; padding: 0px">
+
+                                <form name="ServicesDetailsFrom" role="form" novalidate show-validation>
+                                    <div class="row allcp-form">
+                                        <div class="col-md-6 ph10 mb5">
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead;">Service Catagory</h6>
+                                            </div>
+                                            <div class="col-md-4 ph10 mb5">
+                                                <h6 style="color: #9b9ead;">Service Sub Catagory</h6>
+                                            </div>
+                                            <div class="col-md-4 ph10 mb5">
+                                                <h6 style="color: #9b9ead;">Service Name</h6>
+                                            </div>
+                                            <div class="col-md-1 ph10 mb5" ng-hide="viewServiceCharge=='true'">
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-6 ph10 mb5" ng-show="viewServiceCharge=='true'">
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead;">City</h6>
+                                            </div>
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead;">Tariff Type</h6>
+                                            </div>
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead;">Vendor Charge</h6>
+                                            </div>
+                                            <div class="col-md-3 ph10 mb5">
+                                                <h6 style="color: #9b9ead;">Anvayaa Fee</h6>
+                                            </div>
+
+                                        </div> -->
+
+
+                                    </div>
+                                    <div class="row allcp-form">
+                                        <div class="col-md-6 ph10 mb5">
+
+                                            <div class="col-md-3 ph10 mb5">
+                                                <label for="Type" class="field select">
+                                                    <select ng-model="serviceObj.CategoryID" name="CategoryID"
+                                                        id="CategoryID" ng-change="ViewCategoriesDetails()">
+                                                        <option selected value=""> Select Category</option>
+                                                        <option ng-repeat="categorie in Categories"
+                                                            value="{{categorie.CategoryID}}">
+                                                            {{categorie.AliasName}}</option>
+                                                    </select>
+                                                    <i class="arrow double"></i>
+                                                </label>
+                                            </div>
+                                            <div class="col-md-4 ph10 mb5">
+                                                <label for="Type" class="field select">
+                                                    <select ng-model="serviceObj.SubCategoryID" name="SubCategoryID"
+                                                        id="SubCategoryID">
+                                                        <option selected value="">Select Sub Category</option>
+                                                        <option ng-repeat="subcategorie in SubCategories"
+                                                            value="{{subcategorie.SubCategoryID}}">
+                                                            {{subcategorie.AliasName}}</option>
+                                                    </select>
+                                                    <i class="arrow double"></i>
+                                                </label>
+                                            </div>
+                                            <div class="col-md-4 ph10 mb5">
+                                                <label for="Type" class="field select">
+                                                    <select ng-model="serviceObj.ServiceID" name="ServiceID"
+                                                        id="ServiceID">
+                                                        <option selected value="">Select Sub Category</option>
+                                                        <option ng-repeat="subcategorie in SubCategories"
+                                                            value="{{subcategorie.SubCategoryID}}">
+                                                            {{subcategorie.AliasName}}</option>
+                                                    </select>
+                                                    <i class="arrow double"></i>
+                                                </label>
+                                            </div>
+                                            <div class="col-md-1 ph10 mb5" style="margin-top: 10px;"
+                                                ng-hide="viewServiceCharge=='true'">
+                                                <a ng-click="viewServiceChargeDetails()">AddMore</a>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-6 ph10 mb5" ng-show="viewServiceCharge=='true'">
+                                            <div class="row" ng-repeat="service in ServiceChargeArray;">
+
+                                                <div class="col-md-3 ph10 mb5">
+
+                                                    <input type="checkbox" value="{{ServiceChargeArray[$index].City}}"
+                                                        ng-checked="ServiceChargeArray[$index].City" />
+                                                    <label>{{ServiceChargeArray[$index].City}}</label>
+
+                                                </div>
+                                                <div class="col-md-3 ph10 mb5">
+                                                    <input class="form-control" type="text"
+                                                        ng-model="ServiceChargeArray[$index].TariffType"
+                                                        name="TariffType" id="TariffType" placeholder="Tariff Type">
+
+                                                </div>
+                                                <div class="col-md-3 ph10 mb5">
+                                                    <input class="form-control" type="text"
+                                                        ng-model="ServiceChargeArray[$index].VendorCharge"
+                                                        name="VendorCharge" id="VendorCharge"
+                                                        placeholder="Vendor Charge">
+
+                                                </div>
+                                                <div class="col-md-3 ph10 mb5">
+                                                    <input class="form-control" type="text"
+                                                        ng-model="ServiceChargeArray[$index].AnvayaaReferalFee"
+                                                        name="AnvayaaReferalFee" id="AnvayaaReferalFee"
+                                                        placeholder="Anvayaa Referal Fee">
+                                                </div>
+
+                                            </div>
+                                        </div> -->
+
+
+
+                                    </div>
+                                    <!-- <div class="row allcp-form" ng-show="viewServiceCharge=='true'">
+                                        <button class="btn btn-primary pull-right" type="button"
+                                            ng-click="AddServiceChargeDetails()">Add </button>
+                                    </div> -->
+
+                                </form>
+                                <!-- <div class="row allcp-form">
+
+                                    <button class="btn btn-primary pull-right" type="button"
+                                        ng-click="createServiceDetails()">Save </button>
+                                </div> -->
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MOU Details -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion-custom"
+                            href="#collapseFive">
+                            <div class="row">
+                                <div class="col-md-6 ph10 mb5">
+                                    <h4 class="panel-title">
+                                        <a>MOU Details</a>
+                                    </h4>
+                                </div>
+                                <div class="col-md-6 ph10 mb5">
+                                    <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="collapseFive" class="panel-collapse collapse">
+                            <div class="panel-body" style="margin-top: 10px; padding: 0px">
+                                <div class="row allcp-form">
+                                    <div class="col-md-3 ph10 mb5">
+                                        <h6 style="color: #9b9ead;">Start Date</h6>
+                                        <div class="input-group date" id="MOUStartDatePicker">
+                                            <input class="form-control" ng-model="PartnerProfile.MoUStartDate"
+                                                name="startDate" required id="STdatepicker" placeholder="MOU Start Date"
+                                                style="height: 42px;">
+                                            <span class="input-group-addon"><img src="images/calendar_1x.png" /></span>
+                                        </div>
+                                        <span for="startDate" class="error"
+                                            ng-show="FilterForm.startDate.$invalid && showErrors">
+                                            MOU Start Date is Required
+                                        </span>
+                                    </div>
+                                    <div class="col-md-3 ph10 mb5">
+                                        <h6 style="color: #9b9ead;">End Date</h6>
+                                        <div class="input-group date" id="MOUEndDatePicker">
+                                            <input class="form-control" ng-model="PartnerProfile.MoUExpiryDate"
+                                                name="endDate" required id="EDdatepicker" placeholder="MOU End Sate"
+                                                style="height: 42px;">
+                                            <span class="input-group-addon"><img src="images/calendar_1x.png" /></span>
+                                        </div>
+                                        <span for="endDate" class="error"
+                                            ng-show="FilterForm.endDate.$invalid && showErrors">
+                                            MOU End Date is Required
+                                        </span>
+                                    </div>
+                                    <div class="col-md-3 ph10 mb5">
+                                        <h6 style="color: #9b9ead;">Period Of Service</h6>
+                                        <input class="form-control" type="text" ng-model="PartnerProfile.startDate"
+                                            name="startDate" id="STdatepicker" placeholder="Enter Peroid Of Service"
+                                            required>
+
+                                    </div>
+                                    <div class="col-md-2 ph10 mb5">
+                                        <label for="file" class="field prepend-icon">
+                                            <input id="myFileInput" ngf-multiple="true" ngf-keep="'distinct'"
+                                                type="file" ngf-select ng-model="MoUImageFile" name="FileField"
+                                                accept="DOC/*" ngf-max-files="5" ngf-max-size="5MB"
+                                                ngf-model-invalid="errorFiles" />
+                                            <!--   <input type="file" name="FileField" id="myFileInput" /> -->
+                                            <button type="button" class="btn  btn-bordered btn-primary"
+                                                onclick="document.getElementById('myFileInput').click()">
+                                                <i class="fa fa-upload"></i> MOU Attachment
+                                            </button>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row allcp-form">
+                                    <button type="button" class="btn  btn-bordered btn-primary">Save</button>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Business Operation Details -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion-custom"
+                            href="#collapseSix">
+                            <div class="row">
+                                <div class="col-md-6 ph10 mb5">
+                                    <h4 class="panel-title">
+                                        <a>Business Operation Details</a>
+                                    </h4>
+                                </div>
+                                <div class="col-md-6 ph10 mb5">
+                                    <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="collapseSix" class="panel-collapse collapse">
+                            <div class="panel-body" style="margin-top: 10px; padding: 0px">
+
+                                <form name="BOperationForm" role="form" novalidate show-validation>
+
+                                    <div class="row allcp-form">
+                                        <div class="col-md-3 ph10 mb5">
+                                            <h6 style="color: #9b9ead;">City</h6>
+                                            <label for="City" class="field select">
+                                                <select ng-model="BusinessOperationObj.CityID" name="City" id="City"
+                                                    required>
+                                                    <option selected value="">Select City</option>
+                                                    <option ng-repeat="city in ServiceAreaCityName"
+                                                        value="{{city.CityID}}"> {{city.CityName}}</option>
+                                                </select>
+                                                <i class="arrow double"></i>
+                                            </label>
+                                            <span for="City" class="error"
+                                                ng-show="BOperationForm.City.$invalid && showErrors">
+                                                City is Required
+                                            </span>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <button class="btn btn-primary pull-right" type="button"
+                                                ng-click="AddBusinessOperation(BOperationForm)">ADD</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <!-- <div class="col-md-1 ph10 mb5">
+                                <h6 style="color: #9b9ead;">Sr No.</h6>
+                            </div> -->
+                                        <div class="col-md-3 ph10 mb5">
+                                            <h6 style="color: #9b9ead;">Day</h6>
+                                        </div>
+                                        <div class="col-md-3 ph10 mb5">
+                                            <h6 style="color: #9b9ead;">Start Time</h6>
+                                        </div>
+                                        <div class="col-md-3 ph10 mb5">
+                                            <h6 style="color: #9b9ead;">End Time</h6>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-repeat="day in DaysArray;">
+                                        <!-- <div class="col-md-1 ph10 mb5">
+                                {{$index +1}}
+                            </div> -->
+                                        <div class="col-md-3 ph10 mb5">
+                                            <input class="form-control" type="text" ng-model="DaysArray[$index].Day"
+                                                name="Day" id="Day" placeholder="Enter Day">
+                                            <!-- <span for="Day" class="error"
+                                    ng-show="BOperationForm.Day.$invalid && showErrors && !DaysArray.Day &&($index ==index)">
+                                    Day is Required
+                                </span> -->
+                                        </div>
+                                        <div class="col-md-3 ph10 mb5">
+                                            <input class="form-control" type="text"
+                                                ng-model="DaysArray[$index].StartTime" name="StartTime" id="StartTime"
+                                                placeholder="Business Days">
+                                            <!-- <span for="StartTime" class="error"
+                                    ng-show="BOperationForm.StartTime.$invalid && showErrors && !DaysArray.StartTime &&($index ==index)">
+                                    Start Time is Required
+                                </span> -->
+                                        </div>
+                                        <div class="col-md-3 ph10 mb5">
+                                            <input class="form-control" type="text" ng-model="DaysArray[$index].EndTime"
+                                                name="EndTime" id="EndTime" placeholder="Business Days">
+                                            <!-- <span for="StartTime" class="error"
+                                    ng-show="BOperationForm.EndTime.$invalid && showErrors && !DaysArray.EndTime &&($index ==index)">
+                                    End Time is Required
+                                </span> -->
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+
